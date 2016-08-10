@@ -1,0 +1,52 @@
+﻿{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "uniqueName": {
+      "value": "W10-011"
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/5555afd9-779e-4741-97eb-f96bccf2d2e1/resourceGroups/MAXLabKeyVault/providers/Microsoft.KeyVault/vaults/CredVault"
+        },
+        "secretName": "oualabadmin"
+      }
+    },
+    "adminUsername": {
+      "value": "oualabadmin"
+    },
+    "domainUsername": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/5555afd9-779e-4741-97eb-f96bccf2d2e1/resourceGroups/MAXLabKeyVault/providers/Microsoft.KeyVault/vaults/CredVault"
+        },
+        "secretName": "DomainJoinServiceAccountName"
+      }
+    },
+    "domainPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/5555afd9-779e-4741-97eb-f96bccf2d2e1/resourceGroups/MAXLabKeyVault/providers/Microsoft.KeyVault/vaults/CredVault"
+        },
+        "secretName": "DomainJoinServicePassword"
+      }
+    },
+    "domainFQDN": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/5555afd9-779e-4741-97eb-f96bccf2d2e1/resourceGroups/MAXLabKeyVault/providers/Microsoft.KeyVault/vaults/CredVault"
+        },
+        "secretName": "DomainFQDN"
+      }
+    },
+    "ouPath": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/5555afd9-779e-4741-97eb-f96bccf2d2e1/resourceGroups/MAXLabKeyVault/providers/Microsoft.KeyVault/vaults/CredVault"
+        },
+        "secretName": "ouPath"
+      }
+    }
+  }
+}
