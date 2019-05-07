@@ -102,6 +102,8 @@
     "subID": "[subscription().subscriptionId]",
     "location": "[resourceGroup().location]",
 
+    "vnetName": "MAXLab-CORP-WCUS-VNET-1",
+
     "regionSettings": "[variables(concat(variables('subID'),'-',variables('location')))]",
 
     "5555afd9-779e-4741-97eb-f96bccf2d2e1-westus": {
@@ -196,7 +198,7 @@
             "value": "Dynamic"
           },
           "vnetName": {
-            "value": "[variables('regionSettings').vnetName]"
+            "value": "[variables('vnetName')]"
           },
           "domainName": {
             "value": "[parameters('domainName')]"
@@ -232,7 +234,7 @@
             "value": "Dynamic"
           },
           "vnetName": {
-            "value": "[variables('regionSettings').vnetName]"
+            "value": "[variables('vnetName')]"
           },
           "domainName": {
             "value": "[parameters('domainName')]"
@@ -272,7 +274,7 @@
             "value": "Dynamic"
           },
           "vnetName": {
-            "value": "[variables('regionSettings').vnetName]"
+            "value": "[variables('vnetName')]"
           },
           "domainName": {
             "value": "[parameters('domainName')]"
