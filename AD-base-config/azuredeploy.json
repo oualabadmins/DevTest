@@ -79,7 +79,7 @@
       "metadata": {
         "description": "Auto-generated container in staging storage account to receive post-build staging folder upload."
       },
-      "defaultValue": "https://raw.githubusercontent.com/oualabadmins/lab_deploy/master/max-base-config_x-vm_corpnet"
+      "defaultValue": "https://raw.githubusercontent.com/oualabadmins/DevTest/master/AD-base-config"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
