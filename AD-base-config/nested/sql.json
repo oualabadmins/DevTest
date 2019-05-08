@@ -116,9 +116,7 @@
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
           "configurationFunction": "[parameters('configurationFunction')]",
-          "Properties": {
-            "DomainName": "[parameters('SharedVmConfig').domainName]"
-          }
+          "Properties": {}
         }
       }
     },
