@@ -44,7 +44,7 @@
         "No", "Yes"
       ],
       "metadata": {
-        "description": "Choose 'No' to deploy no client VM, or 'Yes' if you want to deploy a client VM from a custom generalized VHD that you have uploaded to an accessible storage account."
+        "description": "Choose 'Yes' if you want to deploy one or more Windows 10 client VMs."
       },
       "defaultValue": "Yes"
     },
@@ -52,27 +52,35 @@
       "type": "int",
       "metadata": {
         "description": "The number of app server VMs to deploy."
-      }
+      },
+      "defaultValue": 1
     },
     "numberOfClientVms": {
       "type": "int",
       "metadata": {
-        "description": "The number of client VMs to deploy."
-      }
+        "description": "The number of Windows 10 client VMs to deploy."
+      },
+      "defaultValue": 1
     },
     "vmSizeServer": {
       "type": "string",
       "metadata": {
         "description": "Select a VM size for all server VMs in your deployment."
       },
-      "defaultValue": "Standard_DS4_v2"
+      "allowedValues": [
+        "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2"
+      ],
+      "defaultValue": "Standard_DS3_v2"
     },
     "vmSizeClient": {
       "type": "string",
       "metadata": {
         "description": "Select a VM size for all Windows 10 client VMs in your deployment."
       },
-      "defaultValue": "Standard_DS4_v2"
+      "allowedValues": [
+        "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2"
+      ],
+      "defaultValue": "Standard_DS3_v2"
     },
     "_artifactsLocation": {
       "type": "string",
@@ -97,12 +105,11 @@
     "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
-    "nsgName": "[concat(parameters('configName'),'-NSG')]",
 
     "subID": "[subscription().subscriptionId]",
     "location": "[resourceGroup().location]",
 
-    "vnetName": "MAXLab-CORP-WCUS-VNET-1",
+    "vnetName": "maxlab-corp-wcus-vnet-1",
 
     "regionSettings": "[variables(concat(variables('subID'),'-',variables('location')))]",
 
