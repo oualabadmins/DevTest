@@ -2,7 +2,7 @@
 
 This template is intended for deployment in a **corpnet DevTest lab**.
 
-**Time to deploy**: 40+ minutes
+**Time to deploy**: 25-40 minutes
 
 The **AD Base Configuration** template provisions a test environment on an existing corpnet-connected ER circuit consisting of a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, one or more application servers running Windows Server 2012 R2 or 2016, and optionally one or more client VMs running Windows 10. All member VMs are joined to the domain.
 
@@ -38,7 +38,7 @@ The following resources are deployed as part of the solution:
 
 ## Known issues
 
-+ The client VM deployment may take longer than expected, and then appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
++ The client VM deployment may take longer than expected, and then appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS3_v2.
 
 `Tags: TLG, Test Lab Guide, Base Configuration`
 ___
