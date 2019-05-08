@@ -508,9 +508,6 @@
           "SharedVmConfig": { 
             "value": "[variables('SharedVmConfig')]" 
           },
-          "count": {
-            "value": 1
-          },
           "modulesURL": {
             "value": "[variables('assetLocation')]"
           },

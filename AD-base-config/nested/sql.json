@@ -5,9 +5,6 @@
     "SharedVmConfig": {
       "type": "object"
     },
-    "count": {
-      "type": "int"
-    },
     "modulesURL": {
       "type": "string"
     },
@@ -19,25 +16,21 @@
     }
   },
   "variables": {
-    "nicName": "[concat(parameters('sharedVmConfig').configName,'-SQL_NIC-')]",
+    "nicName": "[concat(parameters('sharedVmConfig').configName,'-SQL_NIC-1')]",
     "nicID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
   },
   "resources": [
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat('SQL',copyIndex(1))]",
+      "name": "SQL",
       "location": "[parameters('SharedVmConfig').location]",
-      "copy": {
-        "name": "vms",
-        "count": "[parameters('count')]"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
         "osProfile": {
-          "computerName": "[concat('SQL',copyIndex(1))]",
+          "computerName": "SQL",
           "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
@@ -55,7 +48,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[concat(variables('nicID'),copyIndex(1))]"
+              "id": "[variables('nicID')]"
             }
           ]
         },
@@ -73,7 +66,7 @@
       "name": "/JoinDomain",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[concat('SQL',copyIndex(1))]"
+        "SQL"
       ],
       "tags": {
         "displayName": "Join Domain"
@@ -101,7 +94,7 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[concat('SQL',copyIndex(1))]"
+        "SQL"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -127,7 +120,7 @@
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[concat('SQL',copyIndex(1))]"
+        "SQL"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -145,7 +138,7 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[concat('SQL',copyIndex(1))]",
+        "SQL",
         "/JoinDomain"
       ],
       "properties": {

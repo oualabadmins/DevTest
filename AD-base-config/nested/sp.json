@@ -109,7 +109,9 @@
         "typeHandlerVersion": "2.9",
         "autoUpgradeMinorVersion": true,
         "protectedSettings": {
-          "Items": {}
+          "Items": {
+            "AdminPassword": "[parameters('SharedVmConfig').adminPassword]"
+          }
         },
         "settings": {
           "modulesUrl": "[concat(parameters('modulesURL'),'/SPConfig.ps1.zip')]",
@@ -117,7 +119,11 @@
           "wmfVersion": "latest",
           "configurationFunction": "[parameters('configurationFunction')]",
           "Properties": {
-            "DomainName": "[parameters('SharedVmConfig').domainName]"
+            "DomainName": "[parameters('SharedVmConfig').domainName]",
+            "AdminCreds": {
+              "UserName": "[parameters('SharedVmConfig').adminUserName]",
+              "Password": "PrivateSettingsRef:AdminPassword"
+            }
           }
         }
       }
