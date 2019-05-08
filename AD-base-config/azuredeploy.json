@@ -5,37 +5,27 @@
     "configName": {
       "type": "string",
       "metadata": {
-        "description": "The name of the deployment, i.e. BaseConfig01. Do not use spaces or special characters other than _ or -. Used to concatenate resource names for the deployment."
+        "description": "The unique prefix name of the deployment, i.e. kvice-sp-01. Do not use spaces or special characters other than _ or -. Used to prefix resource names for the deployment."
       },
-      "defaultValue": ""
+      "defaultValue": "<alias>-<purpose, such as sp or ccm>-<2-digit number>"
     },
     "domainName": {
       "type": "string",
       "metadata": {
-        "description": "The FQDN of the new AD domain."
+        "description": "The FQDN of the AD domain. Use a unique name, such as corp.contoso52.com."
       },
-      "defaultValue": "corp.contoso.com"
-    },
-    "serverOS": {
-      "type": "string",
-      "allowedValues": [
-        "2012-R2-Datacenter", "2016-Datacenter"
-      ],
-      "metadata": {
-        "description": "The OS of application servers in your deployment."
-      },
-      "defaultValue": "2016-Datacenter"
+      "defaultValue": "corp.<contosoXX>.com"
     },
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "The name of the domain administrator account to create, i.e. globaladmin. This will also be used to create a local admin account on each VMs."
+        "description": "The name of the domain administrator account, i.e. globaladmin. This will also be a local admin account on each VM."
       }
     },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The administrator account password."
+        "description": "The domain administrator account password. Don't forget this! We can't recover it if you do."
       }
     },
     "deployClientVm": {
@@ -51,16 +41,26 @@
     "numberOfAppVms": {
       "type": "int",
       "metadata": {
-        "description": "The number of app server VMs to deploy."
+        "description": "The number of app server VMs."
       },
       "defaultValue": 1
     },
     "numberOfClientVms": {
       "type": "int",
       "metadata": {
-        "description": "The number of Windows 10 client VMs to deploy."
+        "description": "The number of Windows 10 client VMs."
       },
       "defaultValue": 1
+    },
+    "serverOS": {
+      "type": "string",
+      "allowedValues": [
+        "2012-R2-Datacenter", "2016-Datacenter"
+      ],
+      "metadata": {
+        "description": "The OS for the DC and all app servers."
+      },
+      "defaultValue": "2016-Datacenter"
     },
     "vmSizeServer": {
       "type": "string",
@@ -78,21 +78,21 @@
         "description": "Select a VM size for all Windows 10 client VMs in your deployment."
       },
       "allowedValues": [
-        "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2"
+        "Standard_DS2_v2", "Standard_DS3_v2", "Standard_DS4_v2"
       ],
-      "defaultValue": "Standard_DS3_v2"
+      "defaultValue": "Standard_DS2_v2"
     },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
-        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload."
+        "description": "Github source repo. DO NOT CHANGE."
       },
       "defaultValue": "https://raw.githubusercontent.com/oualabadmins/DevTest/master/AD-base-config"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
       "metadata": {
-        "description": "Auto-generated token to access _artifactsLocation."
+        "description": "Github source repo SAS token, if needed. DO NOT CHANGE."
       },
       "defaultValue": ""
     }
@@ -163,7 +163,8 @@
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
       "sasToken": "[parameters('_artifactsLocationSasToken')]",
       "domainName": "[parameters('domainName')]",
-      "configName": "[parameters('configName')]"
+      "configName": "[parameters('configName')]",
+      "ou": "[concat('OU=Machines,DC=',replace(parameters('domainName'),'.',',DC='))]"
     }
   },
 
