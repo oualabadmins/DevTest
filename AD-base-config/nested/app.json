@@ -82,7 +82,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "Name": "[parameters('SharedVmConfig').domainName]",
-          "OUPath": null,
+          "OUPath": "[parameters('SharedVmConfig').ou]",
           "Options": "3",
           "Restart": "true",
           "User": "[parameters('SharedVmConfig').domainUserName]"
