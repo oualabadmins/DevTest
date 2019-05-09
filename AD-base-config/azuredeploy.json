@@ -276,6 +276,7 @@
       "name": "[concat(parameters('configName'),'-APP_NIC_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[greater(parameters('numberOfAppVms'),'0')]",
       "comments": "This is the deployment resource for APP NICs.",
       "dependsOn": [
         "[concat(parameters('configName'),'-AD_NIC_DEPLOY')]"
@@ -315,6 +316,7 @@
       "name": "[concat(parameters('configName'),'-SQL_NIC_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('deploySQL'),'Yes')]",
       "comments": "This is the deployment resource for SQL NICs.",
       "dependsOn": [
         "[concat(parameters('configName'),'-AD_NIC_DEPLOY')]"
@@ -354,6 +356,7 @@
       "name": "[concat(parameters('configName'),'-SP_NIC_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('deploySharePoint'),'Yes')]",
       "comments": "This is the deployment resource for SharePoint NICs.",
       "dependsOn": [
         "[concat(parameters('configName'),'-AD_NIC_DEPLOY')]"
@@ -464,6 +467,7 @@
       "name": "[concat(parameters('configName'),'-APP_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[greater(parameters('numberOfAppVms'),'0')]",
       "comments": "This is the deployment resource for the app server VMs.",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-ADDC_DEPLOY')]"
@@ -494,6 +498,7 @@
       "name": "[concat(parameters('configName'),'-SQL_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('deploySQL'),'Yes')]",
       "comments": "This is the deployment resource for the SQL Server VM.",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-ADDC_DEPLOY')]"
@@ -524,6 +529,7 @@
       "name": "[concat(parameters('configName'),'-SP_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('deploySharePoint'),'Yes')]",
       "comments": "This is the deployment resource for the SharePoint Server VMs.",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-ADDC_DEPLOY')]"
