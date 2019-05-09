@@ -28,25 +28,45 @@
         "description": "The domain administrator account password. Don't forget this! We can't recover it if you do."
       }
     },
-    "deployClientVm": {
-      "type": "string",
-      "allowedValues": [
-        "No", "Yes"
-      ],
+    "numberOfAppVms": {
+      "type": "int",
       "metadata": {
-        "description": "Choose 'Yes' if you want to deploy one or more Windows 10 client VMs."
+        "description": "The number of app server VMs."
       },
-      "defaultValue": "Yes"
+      "allowedValues": [
+        0, 1, 2
+      ],
+      "defaultValue": 1
     },
-    "deploySQL": {
-      "type": "string",
-      "allowedValues": [
-        "No", "Yes"
-      ],
+    "numberOfSQLVms": {
+      "type": "int",
       "metadata": {
-        "description": "Choose 'Yes' if you want to deploy a single SQL Server VM."
+        "description": "The number of SQL Server VMs."
       },
-      "defaultValue": "Yes"
+      "allowedValues": [
+        0, 1
+      ],
+      "defaultValue": 1
+    },
+    "numberOfSharePointVms": {
+      "type": "int",
+      "metadata": {
+        "description": "The number of SharePoint Server VMs."
+      },
+      "allowedValues": [
+        0, 1, 2
+      ],
+      "defaultValue": 1
+    },
+    "numberOfClientVms": {
+      "type": "int",
+      "metadata": {
+        "description": "The number of Windows 10 client VMs."
+      },
+      "allowedValues": [
+        0, 1, 2
+      ],
+      "defaultValue": 1
     },
     "SQLVersion": {
       "type": "string",
@@ -58,16 +78,6 @@
       },
       "defaultValue": "SQL2017-WS2016"
     },
-    "deploySharePoint": {
-      "type": "string",
-      "allowedValues": [
-        "No", "Yes"
-      ],
-      "metadata": {
-        "description": "Choose 'Yes' if you want to deploy one or more SharePoint Server VMs."
-      },
-      "defaultValue": "Yes"
-    },
     "SharePointVersion": {
       "type": "string",
       "allowedValues": [
@@ -78,37 +88,7 @@
       },
       "defaultValue": "2019"
     },
-    "numberOfAppVms": {
-      "type": "int",
-      "metadata": {
-        "description": "The number of app server VMs."
-      },
-      "allowedValues": [
-        "0", "1", "2"
-      ],
-      "defaultValue": 1
-    },
-    "numberOfSpVms": {
-      "type": "int",
-      "metadata": {
-        "description": "The number of SharePoint Server VMs."
-      },
-      "allowedValues": [
-        "0", "1", "2"
-      ],
-      "defaultValue": 1
-    },
-    "numberOfClientVms": {
-      "type": "int",
-      "metadata": {
-        "description": "The number of Windows 10 client VMs."
-      },
-      "allowedValues": [
-        "0", "1", "2"
-      ],
-      "defaultValue": 1
-    },
-    "serverOS": {
+    "appServerOS": {
       "type": "string",
       "allowedValues": [
         "2012-R2-Datacenter", "2016-Datacenter"
@@ -214,7 +194,7 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSizeServer')]",
       "vmSizeClient": "[parameters('vmSizeClient')]",
-      "serverOS": "[parameters('serverOS')]",
+      "serverOS": "[parameters('appServerOS')]",
       "domainUsername": "[variables('domainUsername')]",
       "adminUsername": "[parameters('adminUsername')]",
       "adminPassword": "[parameters('adminPassword')]",
@@ -316,7 +296,7 @@
       "name": "[concat(parameters('configName'),'-SQL_NIC_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "condition": "[equals(parameters('deploySQL'),'Yes')]",
+      "condition": "[greater(parameters('numberOfSQLVms'),'0')]",
       "comments": "This is the deployment resource for SQL NICs.",
       "dependsOn": [
         "[concat(parameters('configName'),'-AD_NIC_DEPLOY')]"
@@ -356,7 +336,7 @@
       "name": "[concat(parameters('configName'),'-SP_NIC_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "condition": "[equals(parameters('deploySharePoint'),'Yes')]",
+      "condition": "[greater(parameters('numberOfSharePointVms'),'0')]",
       "comments": "This is the deployment resource for SharePoint NICs.",
       "dependsOn": [
         "[concat(parameters('configName'),'-AD_NIC_DEPLOY')]"
@@ -375,7 +355,7 @@
             "value": "SP"
           },
           "count": {
-            "value": "[parameters('numberOfSpVms')]"
+            "value": "[parameters('numberOfSharePointVms')]"
           },
           "ipAllocation": {
             "value": "Dynamic"
@@ -396,7 +376,7 @@
       "name": "[concat(parameters('configName'),'-CLIENT_NIC_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
+      "condition": "[greater(parameters('numberOfClientVms'),'0')]",
       "comments": "This is the deployment resource for CLIENT NICs.",
       "dependsOn": [
         "[concat(parameters('configName'),'-AD_NIC_DEPLOY')]"
@@ -498,7 +478,7 @@
       "name": "[concat(parameters('configName'),'-SQL_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "condition": "[equals(parameters('deploySQL'),'Yes')]",
+      "condition": "[greater(parameters('numberOfSQLVms'),'0')]",
       "comments": "This is the deployment resource for the SQL Server VM.",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-ADDC_DEPLOY')]"
@@ -529,7 +509,7 @@
       "name": "[concat(parameters('configName'),'-SP_DEPLOY')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "condition": "[equals(parameters('deploySharePoint'),'Yes')]",
+      "condition": "[greater(parameters('numberOfSharePointVms'),'0')]",
       "comments": "This is the deployment resource for the SharePoint Server VMs.",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-ADDC_DEPLOY')]"
@@ -545,7 +525,7 @@
             "value": "[variables('SharedVmConfig')]" 
           },
           "count": {
-            "value": "[parameters('numberOfSpVms')]"
+            "value": "[parameters('numberOfSharePointVms')]"
           },
           "modulesURL": {
             "value": "[variables('assetLocation')]"
@@ -561,9 +541,9 @@
     },
     {
       "name": "[concat(parameters('configName'),'-CLIENT_DEPLOY')]",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "condition": "[greater(parameters('numberOfClientVms'),'0')]",
       "comments": "This is the deployment resource for client VMs.",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-ADDC_DEPLOY')]"
