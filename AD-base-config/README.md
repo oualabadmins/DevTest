@@ -54,6 +54,7 @@ The following resources are deployed as part of the solution:
   + **SharePoint Server**:
     + SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
     + Before deployment, check to make sure you choose a SQL Server version that is supported by the desired SharePoint Server version.
+    + You can navigate to SharePoint sites in your deployment from other VMs in the same deployment. If you want to navigate to your deployment's SharePoint sites from your work computer, you must add the SharePoint server's FQDN (i.e. SP1.\<yourdomain>.com) and IP address to your work computer's HOSTS file (C:\Windows\system32\drivers\etc\hosts).
 + The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
 + The other machine tier's VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
 + Remember, when you RDP to your VM, you will use **domain\adminusername** for the custom domain of your environment, _not_ your corpnet credentials.
