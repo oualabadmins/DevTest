@@ -22,11 +22,11 @@ Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base
 
 ### Example deployment configuration:
 
-![ScreenShot](images/ad-base-config-example.png)
+![](images/ad-base-config-example.png)
 
 ### Example deployment resources:
 
-![ScreenShot](images/ad-base-config-resources.png)
+![](images/ad-base-config-resources.png)
 
 ## Solution overview and deployed resources
 
