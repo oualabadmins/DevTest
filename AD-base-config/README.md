@@ -18,7 +18,7 @@ This template is intended for deployment in a **corpnet-connected DevTest lab**.
 
 Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base Configuration**:
 
-![](images/ad-base-config-base.PNG)
+![](images/ad-base-config-base.png)
 
 ### Example deployment configuration:
 
