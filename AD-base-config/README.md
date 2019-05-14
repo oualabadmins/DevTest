@@ -18,15 +18,15 @@ This template is intended for deployment in a **corpnet-connected DevTest lab**.
 
 Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base Configuration**:
 
-![ScreenShot](images/ad-base-config-base.png)
+![ScreenShot](https://github.com/oualabadmins/DevTest/blob/master/AD-base-config/images/ad-base-config-base.png)
 
 ### Example deployment configuration:
 
-![ScreenShot](images/ad-base-config-example.png)
+![ScreenShot](https://github.com/oualabadmins/DevTest/blob/master/AD-base-config/images/ad-base-config-example.png)
 
 ### Example deployment resources:
 
-![ScreenShot](images/ad-base-config-resources.png)
+![ScreenShot](https://github.com/oualabadmins/DevTest/blob/master/AD-base-config/images/ad-base-config-resources.png)
 
 ## Solution overview and deployed resources
 
