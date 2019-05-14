@@ -4,28 +4,21 @@
 
 The **AD Base Configuration** template provisions a DevTest Lab test environment on an existing corpnet-connected ER circuit consisting of a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, one or more application servers running Windows Server 2012 R2 or 2016, and optionally one or more client VMs running Windows 10. All member VMs are joined to the domain.
 
-This template is intended for deployment in a **corpnet-connected DevTest lab**.
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Foualabadmins%2Flab_deploy%2Fmaster%2Fmax-base-config_x-vm_corpnet%2Fazuredeploy.json" target="_blank">
-<img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Foualabadmins%2Flab_deploy%2Fmaster%2Fmax-base-config_x-vm_corpnet%2Fazuredeploy.json" target="_blank">
-<img src="http://armviz.io/visualizebutton.png"/>
-</a>
-
 ## Usage
 
-Deploy from a DevTest lab connected to this repo by selecting the base AD Base Configuration:
+This template is intended for deployment in a **corpnet-connected DevTest lab**.
+
+Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base Configuration**:
 
 ![alt text](images/ad-base-config-base.png "AD Base Configuration Base")
 
-Example deployment settings:
+Example deployment configuration:
 
-![alt text](images/ad-base-config-example.png "AD Base Configuration example settings")
+![alt text](images/ad-base-config-example.png "AD Base Configuration example deployment configuration")
 
-Example deployment:
+Example deployment resources:
 
-![alt text](images/ad-base-config-resources.png "AD Base Configuration example deployment")
+![alt text](images/ad-base-config-resources.png "AD Base Configuration example deployment resources")
 
 ## Solution overview and deployed resources
 
