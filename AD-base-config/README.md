@@ -19,9 +19,13 @@ Deploy from a DevTest lab connected to this repo by selecting the base AD Base C
 
 ![alt text](images/ad-base-config-base.png "AD Base Configuration Base")
 
+Example deployment settings:
+
+![alt text](images/ad-base-config-example.png "AD Base Configuration example settings")
+
 Example deployment:
 
-![alt text](images/ad-base-config-example.png "AD Base Configuration Example")
+![alt text](images/ad-base-config-resources.png "AD Base Configuration example deployment")
 
 ## Solution overview and deployed resources
 
