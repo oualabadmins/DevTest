@@ -16,7 +16,7 @@ All server VMs can be deployed with Windows Server 2012 R2, 2016 or 2019, and al
 
 This template is intended for deployment in a **corpnet-connected DevTest lab**.
 
-Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base Configuration**:
+Deploy from a DevTest Lab connected to this repo by clicking the **Add+** button and selecting the base **AD Base Configuration**:
 
 ![](images/ad-base-config-base.png)
 
@@ -46,8 +46,13 @@ The following resources are deployed as part of the solution:
 ## Solution notes
 
 + Machine tier deployment notes:
-  + SQL Server: SQL is configured with the default instance name _MSSQLSERVER_ with TCP enabled on port **1433**. The user account you specified in the deployment belongs to the sysadmin role. You must log into the SQL VM with this local account to access the SQL server using the SQL Management Studio.
-  + SharePoint Server: SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
+  + **SQL Server**:
+    + You can only deploy a single SQL Server VM. SQL AlwaysOn is not available in this template.
+    + SQL is configured with the default instance name _MSSQLSERVER_ with TCP enabled on port **1433**.
+    + The user account you specified in the deployment belongs to the sysadmin role. You must log into the SQL VM with this local account to access the SQL server using the SQL Management Studio.
+  + **SharePoint Server**:
+    + SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
+    + Before deployment, check to make sure you choose a SQL Server version that is supported by the desired SharePoint Server version.
 + The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
 + The other machine tier's VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
 + Remember, when you RDP to your VM, you will use **domain\adminusername** for the custom domain of your environment, _not_ your corpnet credentials.
