@@ -123,7 +123,7 @@
       "metadata": {
         "description": "Github source repo. DO NOT CHANGE."
       },
-      "defaultValue": "https://raw.githubusercontent.com/oualabadmins/DevTest/new-tiers/AD-base-config"
+      "defaultValue": "https://raw.githubusercontent.com/oualabadmins/DevTest/master/AD-base-config"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
