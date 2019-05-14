@@ -32,7 +32,7 @@ The following resources are deployed as part of the solution:
 
 + **AD DC VM**: Windows Server VM configured as a domain controller and DNS.
 + **App Server VM(s)**: 0-_X_ Windows Server VM(s). IIS is installed, and C:\Files containing example.txt is shared as "Files".
-+ **SQL Server**: 0-1 Windows Server VM(s) with SQL Server **2014 SP3**, **2016 SP2** or **2017**
++ **SQL Server**: 0-1 Windows Server VM(s) with SQL Server **2014 SP3**, **2016 SP2** or **2017**. The hostname is always **SQL**.
 + **SharePoint Server**: 0-_X_ Windows Server VM(s) with SharePoint Server **2013**, **2016** or **2019**
 + **Client VM(s)**: 0-_X_ Windows 10 client(s)
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
@@ -46,8 +46,8 @@ The following resources are deployed as part of the solution:
 + Machine tier deployment notes:
   + **SQL Server**:
     + You can only deploy a single SQL Server VM. SQL AlwaysOn is not available in this template.
-    + SQL is configured with the default instance name _MSSQLSERVER_ with TCP enabled on port **1433**.
-    + The user account you specified in the deployment belongs to the sysadmin role. You must log into the SQL VM with this local account to access the SQL server using the SQL Management Studio.
+    + SQL is configured with the default instance name SQL\_MSSQLSERVER_ with TCP enabled on port **1433**.
+    + The user account you specified in the deployment creates a local admin account on the SQL Server VM that belongs to the sysadmin role. Before you configure SharePoint Server, you must log into the SQL VM with this local account, access the SQL server using SQL Management Studio, and add a domain account as a server login.
   + **SharePoint Server**:
     + SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
     + Before deployment, check to make sure you choose a SQL Server version that is supported by the desired SharePoint Server version.
