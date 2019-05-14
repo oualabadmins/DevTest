@@ -15,7 +15,13 @@ This template is intended for deployment in a **corpnet-connected DevTest lab**.
 
 ## Usage
 
-Deploy from a DevTest lab connected to this repo.
+Deploy from a DevTest lab connected to this repo by selecting the base AD Base Configuration:
+
+![alt text](images/ad-base-config-base.png "AD Base Configuration Base")
+
+Example deployment:
+
+![alt text](images/ad-base-config-example.png "AD Base Configuration Example")
 
 ## Solution overview and deployed resources
 
@@ -59,3 +65,4 @@ Last update: _5/8/2019_
 + **1/23/2019**: Updated Win10 SKU to RS3-Pro - the other sku doesn't exist.
 + **5/7/2019**: Reconfigured for use in corpnet DevTest labs.
 + **5/8/2019**: Reconfigured DSC resources, added OU creation. Set member tiers to join to the custom OU to prevent joinDomain extension failures.
++ **5/14/2019**: Removed SP DSC until I can complete troubleshooting.
