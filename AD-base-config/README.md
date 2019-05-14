@@ -22,7 +22,7 @@ Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base
 
 ### Example deployment configuration:
 
-![](images/ad-base-config-example.png)
+![alt text](images/ad-base-config-example.png "Example deployment configuration")
 
 ### Example deployment resources:
 
