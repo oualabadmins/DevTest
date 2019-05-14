@@ -90,6 +90,39 @@
     },
     {
       "type": "extensions",
+      "name": "/SQLConfig",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('SharedVmConfig').location]",
+      "dependsOn": [
+        "SQL"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.9",
+        "autoUpgradeMinorVersion": true,
+        "protectedSettings": {
+          "Items": {
+            "AdminPassword": "[parameters('SharedVmConfig').adminPassword]"
+          }
+        },
+        "settings": {
+          "modulesUrl": "[concat(parameters('modulesURL'),'/SQLConfig.ps1.zip')]",
+          "sasToken": "[parameters('SharedVmConfig').SasToken]",
+          "wmfVersion": "latest",
+          "configurationFunction": "[parameters('configurationFunction')]",
+          "Properties": {
+            "DomainName": "[parameters('SharedVmConfig').domainName]",
+            "AdminCreds": {
+              "UserName": "[parameters('SharedVmConfig').adminUserName]",
+              "Password": "PrivateSettingsRef:AdminPassword"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "extensions",
       "name": "/BGInfo",
       "apiVersion": "2017-03-30",
       "scale": null,
