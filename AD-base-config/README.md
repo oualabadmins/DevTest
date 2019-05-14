@@ -2,31 +2,39 @@
 
 **Time to deploy**: 25-40 minutes
 
-The **AD Base Configuration** template provisions a DevTest Lab test environment on an existing corpnet-connected ER circuit consisting of a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, one or more application servers running Windows Server 2012 R2 or 2016, and optionally one or more client VMs running Windows 10. All member VMs are joined to the domain.
+The **AD Base Configuration** template provisions a DevTest Lab test environment on an existing corpnet-connected ER circuit consisting of:
+
++ Windows Server 2012 R2 or 2016 Active Directory domain controller for a custom AD domain
++ Optional SQL Server
++ Application servers with IIS
++ SharePoint Servers
++ Windows 10 clients
+
+All server VMs can be deployed with Windows Server 2012 R2, 2016 or 2019, and all VMs are automatically joined to the custom AD domain.
 
 ## Usage
 
-This template is intended for deployment in a **corpnet-connected DevTest lab**.
+This template is intended for deployment in a **corpnet-connected DevTest lab**. You can deploy this template in the general-use [MAX-DTL-WCUS-01 DevTest lab](https://aka.ms/devtest1) by clicking the **Add+** button and selecting the base **AD Base Configuration**:
 
-Deploy from a DevTest Lab connected to this repo by selecting the base **AD Base Configuration**:
+![](images/ad-base-config-base.png)
 
-![alt text](images/ad-base-config-base.png "AD Base Configuration Base")
+### Example deployment configuration:
 
-Example deployment configuration:
+![](images/ad-base-config-example.png)
 
-![alt text](images/ad-base-config-example.png "AD Base Configuration example deployment configuration")
+### Example deployment resources:
 
-Example deployment resources:
-
-![alt text](images/ad-base-config-resources.png "AD Base Configuration example deployment resources")
+![](images/ad-base-config-resources.png)
 
 ## Solution overview and deployed resources
 
 The following resources are deployed as part of the solution:
 
-+ **AD DC VM**: Windows Server 2012 R2 or 2016 VM configured as a domain controller and DNS.
-+ **App Server VM(s)**: Windows Server 2012 R2 or 2016 VM(s) joined to the domain. IIS is installed, and C:\Files containing example.txt is shared as "Files".
-+ **Client VM(s)**: Windows 10 client(s) joined to the domain.
++ **AD DC VM**: Windows Server VM configured as a domain controller and DNS.
++ **App Server VM(s)**: 0-_X_ Windows Server VM(s). IIS is installed, and C:\Files containing example.txt is shared as "Files".
++ **SQL Server**: 0-1 Windows Server VM(s) with SQL Server **2014 SP3**, **2016 SP2** or **2017**. The hostname is always **SQL**.
++ **SharePoint Server**: 0-_X_ Windows Server VM(s) with SharePoint Server **2013**, **2016** or **2019**
++ **Client VM(s)**: 0-_X_ Windows 10 client(s)
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **Network interfaces**: 1 NIC per VM with dynamic private IP address.
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain.
@@ -36,8 +44,16 @@ The following resources are deployed as part of the solution:
 ## Solution notes
 
 + Machine tier deployment notes:
-  + SQL Server: SQL is configured with the default instance name _MSSQLSERVER_ with TCP enabled on port **1433**. The user account you specified in the deployment belongs to the sysadmin role. You must log into the SQL VM with this local account to access the SQL server using the SQL Management Studio.
-  + SharePoint Server: SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
+  + **AD DC**:
+    + Users created: _User1_ (domain admin account), _sqlsvc_ (SQL service), and _spsvc_ (SharePoint Farm service).
+  + **SQL Server**:
+    + The name of the SQL Server VM is always SQL._\<domain>_.
+    + You can only deploy a single SQL Server VM. SQL AlwaysOn is not available in this template.
+    + SQL is configured with the default instance name SQL\\_MSSQLSERVER_ with TCP enabled on port **1433**.
+    + The user account you specified in the deployment creates a local admin account on the SQL Server VM that belongs to the _sysadmin_ role. Other accounts added to the sysadmin role are _\<domain>\domain admin account_, _\<domain>\sqlsvc_ and _\<domain>\spsvc_.
+  + **SharePoint Server**:
+    + SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
+    + Before deployment, check to make sure you choose a SQL Server version that is supported by the desired SharePoint Server version.
 + The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
 + The other machine tier's VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
 + Remember, when you RDP to your VM, you will use **domain\adminusername** for the custom domain of your environment, _not_ your corpnet credentials.
@@ -62,4 +78,4 @@ Last update: _5/8/2019_
 + **1/23/2019**: Updated Win10 SKU to RS3-Pro - the other sku doesn't exist.
 + **5/7/2019**: Reconfigured for use in corpnet DevTest labs.
 + **5/8/2019**: Reconfigured DSC resources, added OU creation. Set member tiers to join to the custom OU to prevent joinDomain extension failures.
-+ **5/14/2019**: Removed SP DSC until I can complete troubleshooting.
++ **5/14/2019**: Testing SQL & SP DSC
