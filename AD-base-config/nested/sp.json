@@ -99,7 +99,7 @@
       "type": "extensions",
       "name": "/SPConfig",
       "apiVersion": "2017-03-30",
-      "condition": "[greater(length(parameters('modulesUrl')),0)]",
+      "condition": "[greater(length(parameters('modulesUrl')),1000)]",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[concat('SP',copyIndex(1))]"
