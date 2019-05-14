@@ -1,7 +1,7 @@
 ﻿{
   "itemDisplayName": "AD Base Configuration",
   "description": "This template deploys a multi-vm base environment on corpnet with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain.",
-  "summary": "Deploys 2 or more VMs: Server 2012 R2 or 2016 AD DC, Server 2012 R2 or 2016 app server(s) and optional Windows 10 client(s). Provisions an AD domain and joins member VMs.",
+  "summary": "This template deploys a multi-vm base environment on corpnet with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain. Provisions an AD domain and joins member VMs. See https://github.com/oualabadmins/DevTest/tree/master/AD-base-config for details and deployment guidance.",
   "githubUsername": "kelleyvice-msft",
-  "dateUpdated": "2019-5-8"
+  "dateUpdated": "2019-5-14"
 }

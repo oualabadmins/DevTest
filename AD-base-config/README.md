@@ -1,10 +1,10 @@
 ﻿# Skunkworks Lab - AD Base Configuration v1.0
 
-This template is intended for deployment in a **corpnet DevTest lab**.
-
 **Time to deploy**: 25-40 minutes
 
-The **AD Base Configuration** template provisions a test environment on an existing corpnet-connected ER circuit consisting of a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, one or more application servers running Windows Server 2012 R2 or 2016, and optionally one or more client VMs running Windows 10. All member VMs are joined to the domain.
+The **AD Base Configuration** template provisions a DevTest Lab test environment on an existing corpnet-connected ER circuit consisting of a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, one or more application servers running Windows Server 2012 R2 or 2016, and optionally one or more client VMs running Windows 10. All member VMs are joined to the domain.
+
+This template is intended for deployment in a **corpnet-connected DevTest lab**.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Foualabadmins%2Flab_deploy%2Fmaster%2Fmax-base-config_x-vm_corpnet%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -24,7 +24,7 @@ The following resources are deployed as part of the solution:
 + **AD DC VM**: Windows Server 2012 R2 or 2016 VM configured as a domain controller and DNS.
 + **App Server VM(s)**: Windows Server 2012 R2 or 2016 VM(s) joined to the domain. IIS is installed, and C:\Files containing example.txt is shared as "Files".
 + **Client VM(s)**: Windows 10 client(s) joined to the domain.
-+ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
++ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **Network interfaces**: 1 NIC per VM with dynamic private IP address.
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain.
 + **BGInfo**: The **BGInfo** extension is applied to all VMs.
@@ -32,8 +32,11 @@ The following resources are deployed as part of the solution:
 
 ## Solution notes
 
++ Machine tier deployment notes:
+  + SQL Server: SQL is configured with the default instance name _MSSQLSERVER_ with TCP enabled on port **1433**. The user account you specified in the deployment belongs to the sysadmin role. You must log into the SQL VM with this local account to access the SQL server using the SQL Management Studio.
+  + SharePoint Server: SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
 + The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
-+ The *App server* and *Client* VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
++ The other machine tier's VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
 + Remember, when you RDP to your VM, you will use **domain\adminusername** for the custom domain of your environment, _not_ your corpnet credentials.
 
 ## Known issues
