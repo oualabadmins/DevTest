@@ -151,7 +151,7 @@
       },
       "appConfigurationFunction": "AppConfig.ps1\\AppConfig",
       "sqlConfigurationFunction": "SQLConfig.ps1\\SQLConfig",
-      "spConfigurationFunction": "SpConfig.ps1\\SpConfig"
+      "spConfigurationFunction": "SpConfig.ps1\\SharePointConfig"
     },
 
     "SharedVmConfig": {
