@@ -1,4 +1,4 @@
-﻿# Skunkworks Lab - AD Base Configuration v1.0
+﻿# Skunkworks Lab - AD Base Configuration v1.1
 
 **Time to deploy**: 25-40 minutes
 
