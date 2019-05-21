@@ -71,7 +71,7 @@ Developed by the **MAX Skunkworks Lab**
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
 
-Last update: _5/14/2019_
+Last update: _5/21/2019_
 
 ## Changelog
 
@@ -82,3 +82,4 @@ Last update: _5/14/2019_
 + **5/7/2019**: Reconfigured for use in corpnet DevTest labs.
 + **5/8/2019**: Reconfigured DSC resources, added OU creation. Set member tiers to join to the custom OU to prevent joinDomain extension failures.
 + **5/14/2019**: Testing SQL & SP DSC
++ **5/21/2019**: Configured SQLConfig.ps1 to add new logins as type _WindowsUser_.
