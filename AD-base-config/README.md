@@ -43,6 +43,7 @@ The following resources are deployed as part of the solution:
 
 ## Solution notes
 
++ During deployment, Azure will append a series of numbers to the VM name if it is not unique within the DevTest Lab instance. These numbers are only appended to the VM name as shown in Azure, _not_ the actual machine hostname.
 + Machine tier deployment notes:
   + **AD DC**:
     + Users created: _User1_ (domain admin account), _sqlsvc_ (SQL service), and _spfarmsvc_ (SharePoint Farm service). These accounts all use the password you specify in the **adminPassword** field.
@@ -71,7 +72,7 @@ Developed by the **MAX Skunkworks Lab**
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
 
-Last update: _5/21/2019_
+Last update: _5/22/2019_
 
 ## Changelog
 
