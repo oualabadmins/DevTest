@@ -155,7 +155,7 @@
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "/base-config",
+      "name": "[concat(parameters('vmName'),'/base-config')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceID('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
