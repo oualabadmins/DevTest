@@ -166,7 +166,8 @@
       "sasToken": "[parameters('_artifactsLocationSasToken')]",
       "domainName": "[parameters('domainName')]",
       "configName": "[parameters('configName')]",
-      "ou": "[concat('OU=Machines,DC=',replace(parameters('domainName'),'.',',DC='))]"
+      "ou": "[concat('OU=Machines,DC=',replace(parameters('domainName'),'.',',DC='))]",
+      "scriptPath": "[concat(parameters('_artifactsLocation'),'/scripts')]"
     }
   },
 
