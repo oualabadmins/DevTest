@@ -92,7 +92,6 @@
       "type": "extensions",
       "name": "/SQLConfig",
       "apiVersion": "2017-03-30",
-      "condition": "[greater(length(parameters('modulesUrl')),0)]",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "SQL"
