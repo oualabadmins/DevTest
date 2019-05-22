@@ -88,7 +88,7 @@
     {
       "type": "extensions",
       "name": "/SQLConfig",
-      "apiVersion": "2018-06-30",
+      "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "SQL"
