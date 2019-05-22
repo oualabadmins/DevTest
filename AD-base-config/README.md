@@ -1,4 +1,4 @@
-﻿# Skunkworks Lab - AD Base Configuration v1.1
+﻿# Skunkworks Lab - AD Base Configuration v1.2
 
 **Time to deploy**: 25-40 minutes
 
@@ -51,7 +51,7 @@ The following resources are deployed as part of the solution:
     + The name of the SQL Server VM is always SQL._\<domain>_.
     + You can only deploy a single SQL Server VM. SQL AlwaysOn is not available in this template.
     + SQL is configured with the default instance name SQL\\_MSSQLSERVER_ with TCP enabled on port **1433**.
-    + The user account you specified in the deployment creates a local admin account on the SQL Server VM that belongs to the _sysadmin_ role. Other accounts added to the sysadmin role are _\<domain>\domain admin account_, _\<domain>\sqlsvc_ and _\<domain>\spfarmsvc_.
+    + The user account you specified in the deployment is used to create a local admin account on the SQL Server VM that belongs to the _sysadmin_ role. Other domain accounts are added as SQL logins in the sysadmin role by DSC: _\<domain>\domain admin account_, _\<domain>\sqlsvc_ and _\<domain>\spfarmsvc_.
   + **SharePoint Server**:
     + SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
       + Before deployment, check to make sure you choose a SQL Server version that is supported by the desired SharePoint Server version.
@@ -84,3 +84,4 @@ Last update: _5/22/2019_
 + **5/8/2019**: Reconfigured DSC resources, added OU creation. Set member tiers to join to the custom OU to prevent joinDomain extension failures.
 + **5/14/2019**: Testing SQL & SP DSC
 + **5/21/2019**: Configured SQLConfig.ps1 to add new logins as type _WindowsUser_.
++ **5/22/2019**: Reconfigured DSC for SQL configuration. Previous DSC config was failing to log into SQL.
