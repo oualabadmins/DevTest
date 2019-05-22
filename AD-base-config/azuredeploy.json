@@ -7,7 +7,7 @@
       "metadata": {
         "description": "The unique prefix name of the deployment, i.e. kvice-sp-01. Do not use spaces or special characters other than _ or -. Used to prefix resource names for the deployment."
       },
-      "defaultValue": "<alias>-<purpose, such as sp or ccm>-<2-digit number>"
+      "defaultValue": "<alias>-<purpose>-<2-digit number>"
     },
     "domainName": {
       "type": "string",
@@ -74,7 +74,7 @@
         "SQL2017-WS2016", "SQL2016SP2-WS2016", "sql2014sp3-ws2012r2"
       ],
       "metadata": {
-        "description": "The SQL Server version and corresponding Windows Server OS."
+        "description": "The SQL Server version and corresponding Windows Server OS. Make sure you use a SQL version supported by your applications."
       },
       "defaultValue": "SQL2017-WS2016"
     },
@@ -84,7 +84,7 @@
         "2019", "2016", "2013"
       ],
       "metadata": {
-        "description": "The SharePoint Server version. "
+        "description": "The SharePoint Server version."
       },
       "defaultValue": "2019"
     },
