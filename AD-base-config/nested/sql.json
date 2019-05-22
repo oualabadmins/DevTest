@@ -105,11 +105,12 @@
               "userName": "[parameters('SharedVmConfig').adminUserName]",
               "password": "[parameters('SharedVmConfig').adminPassword]"
             }
-          }
+          },
+          "configurationUrlSasToken": "[parameters('SharedVmConfig').SasToken]"
         },
         "settings": {
           "configuration": {
-            "url": "[parameters('modulesURL')]",
+            "url": "[concat(parameters('modulesURL'),'/SQLConfig.ps1.zip')]",
             "script": "SQLConfig.ps1",
             "function": "SQLConfig"
           },
