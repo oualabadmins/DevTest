@@ -33,6 +33,7 @@
         "count": "[parameters('count')]"
       },
       "properties": {
+        "licenseType": "Windows_Server",
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
