@@ -151,6 +151,31 @@
         },
         "protectedSettings": null
       }
-    }
+    },
+    {
+      "apiVersion": "2017-03-30",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "/base-config",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceID('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+        "[resourceID('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'joindomain')]"
+      ],
+      "tags": {
+          "displayName": "base-config"
+      },
+      "properties": {
+          "publisher": "Microsoft.Compute",
+          "type": "CustomScriptExtension",
+          "typeHandlerVersion": "1.9",
+          "autoUpgradeMinorVersion": true,
+          "settings": {
+            "fileUris": ["[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1')]"]
+          },
+          "protectedSettings": {
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', parameters('SharedVmConfig').scriptPath, '/base-config.ps1')]"
+          }
+      }
+  }
   ]
 }
