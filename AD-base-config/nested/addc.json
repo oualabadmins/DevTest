@@ -158,8 +158,8 @@
       "name": "[concat(parameters('vmName'),'/base-config')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[resourceID('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-        "[resourceID('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'joindomain')]"
+        "[parameters('vmName')]",
+        "[concat(parameters('vmName'),'/InstallDomainController')]"
       ],
       "tags": {
           "displayName": "base-config"
