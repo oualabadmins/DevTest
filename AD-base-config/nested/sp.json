@@ -194,20 +194,19 @@
           "displayName": "base-config"
       },
       "properties": {
-          "publisher": "Microsoft.Compute",
-          "type": "CustomScriptExtension",
-          "typeHandlerVersion": "1.9",
-          "autoUpgradeMinorVersion": true,
-          "settings": {
-            "fileUris": ["[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1')]"]
-          },
-          "protectedSettings": {
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', parameters('SharedVmConfig').scriptPath, '/base-config.ps1')]"
-          }
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.9",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1', parameters('SharedVmConfig').SasToken)]"
+          ],
+        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ./base-config.ps1')]"
+        }
       }
-  }
-    ]
     }
-  ],
-  "outputs": {}
+  ]
+    }
+  ]
 }

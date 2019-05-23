@@ -166,12 +166,12 @@
           "typeHandlerVersion": "1.9",
           "autoUpgradeMinorVersion": true,
           "settings": {
-            "fileUris": ["[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1', parameters('SharedVmConfig').SasToken)]"]
-          },
-          "protectedSettings": {
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', parameters('SharedVmConfig').scriptPath, '/base-config.ps1')]"
+            "fileUris": [
+              "[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1', parameters('SharedVmConfig').SasToken)]"
+            ],
+          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ./base-config.ps1')]"
           }
       }
-  }
+    }
   ]
 }
