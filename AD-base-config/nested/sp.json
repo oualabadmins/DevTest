@@ -98,9 +98,8 @@
     },
     {
       "type": "extensions",
-      "name": "/SPConfig",
+      "name": "/BaseConfig",
       "apiVersion": "2017-03-30",
-      "condition": "[greater(length(parameters('modulesUrl')),1000)]",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[concat('SP',copyIndex(1))]"
@@ -116,7 +115,7 @@
           }
         },
         "settings": {
-          "modulesUrl": "[concat(parameters('modulesURL'),'/SpConfig.ps1.zip')]",
+          "modulesUrl": "[concat(parameters('modulesURL'),'/BaseConfig.ps1.zip')]",
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
           "configurationFunction": "[parameters('configurationFunction')]",
@@ -179,31 +178,6 @@
           }
         },
         "protectedSettings": null
-      }
-    },
-    {
-      "apiVersion": "2017-03-30",
-      "type": "extensions",
-      "name": "/base-config",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('SP',copyIndex(1))]",
-        "/JoinDomain"
-      ],
-      "tags": {
-          "displayName": "base-config"
-      },
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.9",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": [
-            "[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1', parameters('SharedVmConfig').SasToken)]"
-          ],
-        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ./base-config.ps1')]"
-        }
       }
     }
   ]

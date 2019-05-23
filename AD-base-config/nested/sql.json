@@ -171,31 +171,6 @@
         },
         "protectedSettings": null
       }
-    },
-    {
-      "apiVersion": "2017-03-30",
-      "type": "extensions",
-      "name": "/base-config",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "SQL",
-        "/JoinDomain"
-      ],
-      "tags": {
-          "displayName": "base-config"
-      },
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.9",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": [
-            "[concat(parameters('SharedVmConfig').scriptPath, '/base-config.ps1', parameters('SharedVmConfig').SasToken)]"
-          ],
-        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ./base-config.ps1')]"
-        }
-      }
     }
   ]
     }
