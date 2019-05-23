@@ -161,9 +161,6 @@
         "[parameters('vmName')]",
         "[concat(parameters('vmName'),'/InstallDomainController')]"
       ],
-      "tags": {
-          "displayName": "base-config"
-      },
       "properties": {
           "publisher": "Microsoft.Compute",
           "type": "CustomScriptExtension",
