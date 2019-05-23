@@ -1,4 +1,4 @@
-﻿# Skunkworks Lab - AD Base Configuration v1.2
+﻿# Skunkworks Lab - AD Base Configuration v1.3
 
 **Time to deploy**: 25-40 minutes
 
@@ -72,7 +72,7 @@ Developed by the **MAX Skunkworks Lab**
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
 
-Last update: _5/22/2019_
+Last update: _5/23/2019_
 
 ## Changelog
 
@@ -85,3 +85,4 @@ Last update: _5/22/2019_
 + **5/14/2019**: Testing SQL & SP DSC
 + **5/21/2019**: Configured SQLConfig.ps1 to add new logins as type _WindowsUser_.
 + **5/22/2019**: Reconfigured DSC for SQL configuration. Previous DSC config was failing to log into SQL.
++ **5/23/2019**: Configured DSC to run BaseConfig script for all server VMs.
