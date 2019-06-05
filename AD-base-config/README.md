@@ -1,6 +1,6 @@
-﻿# Skunkworks Lab - AD Base Configuration v1.3
+﻿# Skunkworks Lab - AD Base Configuration v1.4
 
-**Time to deploy**: 25-40 minutes
+**Time to deploy**: 20-50 minutes, depending on complexity
 
 The **AD Base Configuration** template provisions a DevTest Lab test environment on an existing corpnet-connected ER circuit consisting of:
 
@@ -48,7 +48,7 @@ The following resources are deployed as part of the solution:
   + **AD DC**:
     + Users created: _User1_ (domain admin account), _sqlsvc_ (SQL service), and _spfarmsvc_ (SharePoint Farm service). These accounts all use the password you specify in the **adminPassword** field.
   + **SQL Server**:
-    + The name of the SQL Server VM is always SQL._\<domain>_.
+    + The name of the SQL Server VM is always **SQL._\<domain>_**.
     + You can only deploy a single SQL Server VM. SQL AlwaysOn is not available in this template.
     + SQL is configured with the default instance name SQL\\_MSSQLSERVER_ with TCP enabled on port **1433**.
     + The user account you specified in the deployment is used to create a local admin account on the SQL Server VM that belongs to the _sysadmin_ role. Other domain accounts are added as SQL logins in the sysadmin role by DSC: _\<domain>\domain admin account_, _\<domain>\sqlsvc_ and _\<domain>\spfarmsvc_.
@@ -72,17 +72,18 @@ Developed by the **MAX Skunkworks Lab**
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
 
-Last update: _5/23/2019_
+Last update: _6/5/2019_
 
 ## Changelog
 
-+ **8/8/2018**: Original commit, derived from https://github.com/oualabadmins/lab_deploy/tree/master/max-base-config_x-vm.
-+ **8/9/2018**: Updates to output from nic.json to return DC IP value back to the main template for passing to linked app and client templates. This enables adding the DC IP to DNS settings on member VMs. Removed NSG to avoid inadvertently applying security rules to existing common virtual networks.
++ **8/8/2018**:  Original commit, derived from https://github.com/oualabadmins/lab_deploy/tree/master/max-base-config_x-vm.
++ **8/9/2018**:  Updates to output from nic.json to return DC IP value back to the main template for passing to linked app and client templates. This enables adding the DC IP to DNS settings on member VMs. Removed NSG to avoid inadvertently applying security rules to existing common virtual networks.
 + **1/16/2019**: Updated Win10 SKU to rs3-pro-test to match availability.
 + **1/23/2019**: Updated Win10 SKU to RS3-Pro - the other sku doesn't exist.
-+ **5/7/2019**: Reconfigured for use in corpnet DevTest labs.
-+ **5/8/2019**: Reconfigured DSC resources, added OU creation. Set member tiers to join to the custom OU to prevent joinDomain extension failures.
++ **5/7/2019**:  Reconfigured for use in corpnet DevTest labs.
++ **5/8/2019**:  Reconfigured DSC resources, added OU creation. Set member tiers to join to the custom OU to prevent joinDomain extension failures.
 + **5/14/2019**: Testing SQL & SP DSC
 + **5/21/2019**: Configured SQLConfig.ps1 to add new logins as type _WindowsUser_.
 + **5/22/2019**: Reconfigured DSC for SQL configuration. Previous DSC config was failing to log into SQL.
 + **5/23/2019**: Configured DSC to run BaseConfig script for all server VMs.
++ **6/5/2019**:  Updated DSC resources. BaseConfig now runs as a CSE; SQL is set to _Mixed_ login mode; DSC auth to SQL works as expected.
