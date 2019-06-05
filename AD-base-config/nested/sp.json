@@ -33,7 +33,6 @@
         "count": "[parameters('count')]"
       },
       "properties": {
-        "licenseType": "Windows_Server",
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
@@ -98,8 +97,9 @@
     },
     {
       "type": "extensions",
-      "name": "/BaseConfig",
+      "name": "/SPConfig",
       "apiVersion": "2017-03-30",
+      "condition": "[equals(parameters('count'),0)]",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[concat('SP',copyIndex(1))]"
@@ -115,11 +115,17 @@
           }
         },
         "settings": {
-          "modulesUrl": "[concat(parameters('modulesURL'),'/BaseConfig.ps1.zip')]",
+          "modulesUrl": "[concat(parameters('modulesURL'),'/SpConfig.ps1.zip')]",
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
           "configurationFunction": "[parameters('configurationFunction')]",
-          "Properties": {}
+          "Properties": {
+            "DomainName": "[parameters('SharedVmConfig').domainName]",
+            "AdminCreds": {
+              "UserName": "[parameters('SharedVmConfig').adminUserName]",
+              "Password": "PrivateSettingsRef:AdminPassword"
+            }
+          }
         }
       }
     },
@@ -173,8 +179,9 @@
         },
         "protectedSettings": null
       }
+    }        
+    ]
     }
-  ]
-    }
-  ]
+  ],
+  "outputs": {}
 }

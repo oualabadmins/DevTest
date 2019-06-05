@@ -5,40 +5,39 @@
     "SharedVmConfig": {
       "type": "object"
     },
-    "modulesURL": {
-      "type": "string"
-    },
-    "configurationFunction": {
-      "type": "string"
-    },
-    "SQLVersion": {
-      "type": "string"
+    "count": {
+      "type": "int"
     }
   },
   "variables": {
-    "nicName": "[concat(parameters('sharedVmConfig').configName,'-SQL_NIC-1')]",
+    "nicName": "[concat(parameters('sharedVmConfig').configName,'-CLIENT_NIC-')]",
     "nicID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
   },
   "resources": [
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "SQL",
+      "name": "[concat('CLIENT',copyIndex(1))]",
       "location": "[parameters('SharedVmConfig').location]",
+      "dependsOn": [],
+      "copy": {
+        "name": "vms",
+        "count": "[parameters('count')]"
+      },   
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[parameters('SharedVmConfig').vmSize]"
+          "vmSize": "[parameters('SharedVmConfig').vmSizeClient]"
         },
         "osProfile": {
-          "computerName": "SQL",
+          "computerName": "[concat('CLIENT',copyIndex(1))]",
           "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "MicrosoftSQLServer",
-            "offer": "[parameters('SQLVersion')]",
-            "sku": "[if(equals(parameters('SQLVersion'),'sql2014sp3-ws2012r2'),'enterprise','Enterprise')]",
+            "publisher": "MicrosoftWindowsDesktop",
+            "offer": "Windows-10",
+            "sku": "RS3-Pro",
             "version": "latest"
           },
           "osDisk": {
@@ -48,7 +47,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[variables('nicID')]"
+              "id": "[concat(variables('nicID'),copyIndex(1))]"
             }
           ]
         },
@@ -66,7 +65,7 @@
       "name": "/JoinDomain",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "SQL"
+        "[concat('CLIENT',copyIndex(1))]"
       ],
       "tags": {
         "displayName": "Join Domain"
@@ -95,7 +94,7 @@
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "SQL"
+        "[concat('CLIENT',copyIndex(1))]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -113,7 +112,7 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "SQL",
+        "[concat('CLIENT',copyIndex(1))]",
         "/JoinDomain"
       ],
       "properties": {

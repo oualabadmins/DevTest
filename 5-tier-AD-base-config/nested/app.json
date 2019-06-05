@@ -5,40 +5,45 @@
     "SharedVmConfig": {
       "type": "object"
     },
+    "count": {
+      "type": "int"
+    },
     "modulesURL": {
       "type": "string"
     },
     "configurationFunction": {
       "type": "string"
-    },
-    "SQLVersion": {
-      "type": "string"
     }
   },
   "variables": {
-    "nicName": "[concat(parameters('sharedVmConfig').configName,'-SQL_NIC-1')]",
+    "nicName": "[concat(parameters('sharedVmConfig').configName,'-APP_NIC-')]",
     "nicID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
   },
   "resources": [
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "SQL",
+      "name": "[concat('APP',copyIndex(1))]",
       "location": "[parameters('SharedVmConfig').location]",
+      "copy": {
+        "name": "vms",
+        "count": "[parameters('count')]"
+      },
       "properties": {
+        "licenseType": "Windows_Server",
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
         "osProfile": {
-          "computerName": "SQL",
+          "computerName": "[concat('APP',copyIndex(1))]",
           "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "MicrosoftSQLServer",
-            "offer": "[parameters('SQLVersion')]",
-            "sku": "[if(equals(parameters('SQLVersion'),'sql2014sp3-ws2012r2'),'enterprise','Enterprise')]",
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "[parameters('SharedVmConfig').serverOS]",
             "version": "latest"
           },
           "osDisk": {
@@ -48,7 +53,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[variables('nicID')]"
+              "id": "[concat(variables('nicID'),copyIndex(1))]"
             }
           ]
         },
@@ -66,7 +71,7 @@
       "name": "/JoinDomain",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "SQL"
+        "[concat('APP',copyIndex(1))]"
       ],
       "tags": {
         "displayName": "Join Domain"
@@ -90,12 +95,39 @@
     },
     {
       "type": "extensions",
+      "name": "/AppConfig",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('SharedVmConfig').location]",
+      "dependsOn": [
+        "[concat('APP',copyIndex(1))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.9",
+        "autoUpgradeMinorVersion": true,
+        "protectedSettings": {
+          "Items": {}
+        },
+        "settings": {
+          "modulesUrl": "[concat(parameters('modulesURL'),'/AppConfig.ps1.zip')]",
+          "sasToken": "[parameters('SharedVmConfig').SasToken]",
+          "wmfVersion": "latest",
+          "configurationFunction": "[parameters('configurationFunction')]",
+          "Properties": {
+            "DomainName": "[parameters('SharedVmConfig').domainName]"
+          }
+        }
+      }
+    },
+    {
+      "type": "extensions",
       "name": "/BGInfo",
       "apiVersion": "2017-03-30",
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "SQL"
+        "[concat('APP',copyIndex(1))]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -113,7 +145,7 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "SQL",
+        "[concat('APP',copyIndex(1))]",
         "/JoinDomain"
       ],
       "properties": {
@@ -138,9 +170,8 @@
         },
         "protectedSettings": null
       }
-    }        
-    ]
     }
-  ],
-  "outputs": {}
+  ]
+}
+]
 }

@@ -8,9 +8,6 @@
     "modulesURL": {
       "type": "string"
     },
-    "configurationFunction": {
-      "type": "string"
-    },
     "SQLVersion": {
       "type": "string"
     }
@@ -26,6 +23,7 @@
       "name": "SQL",
       "location": "[parameters('SharedVmConfig').location]",
       "properties": {
+        "licenseType": "Windows_Server",
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
@@ -90,6 +88,41 @@
     },
     {
       "type": "extensions",
+      "name": "/SQLConfig",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('SharedVmConfig').location]",
+      "dependsOn": [
+        "SQL"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.9",
+        "autoUpgradeMinorVersion": true,
+        "protectedSettings": {
+          "configurationArguments": {
+            "admincreds": {
+              "userName": "[parameters('SharedVmConfig').adminUserName]",
+              "password": "[parameters('SharedVmConfig').adminPassword]"
+            }
+          },
+          "configurationUrlSasToken": "[parameters('SharedVmConfig').SasToken]"
+        },
+        "settings": {
+          "configuration": {
+            "url": "[concat(parameters('modulesURL'),'/SQLConfig.ps1.zip')]",
+            "script": "SQLConfig.ps1",
+            "function": "SQLConfig"
+          },
+          "wmfVersion": "latest",
+          "configurationArguments": {
+            "DomainName": "[parameters('SharedVmConfig').domainName]"
+          }
+        }
+      }
+    },
+    {
+      "type": "extensions",
       "name": "/BGInfo",
       "apiVersion": "2017-03-30",
       "scale": null,
@@ -138,9 +171,8 @@
         },
         "protectedSettings": null
       }
-    }        
-    ]
     }
-  ],
-  "outputs": {}
+  ]
+    }
+  ]
 }

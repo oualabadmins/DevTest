@@ -7,7 +7,7 @@
       "metadata": {
         "description": "The unique prefix name of the deployment, i.e. kvice-sp-01. Do not use spaces or special characters other than _ or -. Used to prefix resource names for the deployment."
       },
-      "defaultValue": "<alias>-<purpose, such as sp or ccm>-<2-digit number>"
+      "defaultValue": "<alias>-<purpose>-<2-digit number>"
     },
     "domainName": {
       "type": "string",
@@ -74,7 +74,7 @@
         "SQL2017-WS2016", "SQL2016SP2-WS2016", "sql2014sp3-ws2012r2"
       ],
       "metadata": {
-        "description": "The SQL Server version and corresponding Windows Server OS."
+        "description": "The SQL Server version and corresponding Windows Server OS. Make sure you use a SQL version supported by your applications."
       },
       "defaultValue": "SQL2017-WS2016"
     },
@@ -91,12 +91,12 @@
     "appServerOS": {
       "type": "string",
       "allowedValues": [
-        "2012-R2-Datacenter", "2016-Datacenter"
+        "2012-R2-Datacenter", "2016-Datacenter", "2019-Datacenter"
       ],
       "metadata": {
         "description": "The OS for the DC and all app servers."
       },
-      "defaultValue": "2016-Datacenter"
+      "defaultValue": "2019-Datacenter"
     },
     "vmSizeServer": {
       "type": "string",
@@ -123,7 +123,7 @@
       "metadata": {
         "description": "Github source repo. DO NOT CHANGE."
       },
-      "defaultValue": "https://raw.githubusercontent.com/oualabadmins/DevTest/master/AD-base-config"
+      "defaultValue": "https://raw.githubusercontent.com/oualabadmins/DevTest/master/5-tier-AD-base-config"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
@@ -151,7 +151,7 @@
       },
       "appConfigurationFunction": "AppConfig.ps1\\AppConfig",
       "sqlConfigurationFunction": "SQLConfig.ps1\\SQLConfig",
-      "spConfigurationFunction": "SpConfig.ps1\\SpConfig"
+      "spConfigurationFunction": "BaseConfig.ps1\\BaseConfig"
     },
 
     "SharedVmConfig": {
@@ -166,7 +166,8 @@
       "sasToken": "[parameters('_artifactsLocationSasToken')]",
       "domainName": "[parameters('domainName')]",
       "configName": "[parameters('configName')]",
-      "ou": "[concat('OU=Machines,DC=',replace(parameters('domainName'),'.',',DC='))]"
+      "ou": "[concat('OU=Machines,DC=',replace(parameters('domainName'),'.',',DC='))]",
+      "scriptPath": "[concat(parameters('_artifactsLocation'),'/scripts')]"
     }
   },
 
@@ -459,9 +460,6 @@
           },
           "modulesURL": {
             "value": "[variables('assetLocation')]"
-          },
-          "configurationFunction": {
-            "value": "[variables('VMs').sqlConfigurationFunction]"
           },
           "SQLVersion": {
             "value": "[parameters('SQLVersion')]"

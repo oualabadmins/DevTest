@@ -25,7 +25,6 @@
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
       "properties": {
-        "licenseType": "Windows_Server",
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
