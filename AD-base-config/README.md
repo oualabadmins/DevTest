@@ -18,7 +18,7 @@ All server VMs can be deployed with Windows Server 2012 R2, 2016 or 2019, and al
 
 This template is intended for deployment in a **corpnet-connected DevTest lab**. You can deploy this template in the general-use [MAX-DTL-WCUS-01 DevTest lab](https://aka.ms/devtest1) by clicking the **Add+** button and selecting the base **AD Base Configuration**:
 
-![](images/ad-base-config-base.png)
+![Alt text](images/ad-base-config-base.png "AD base config")
 
 ### Example deployment configuration:
 
