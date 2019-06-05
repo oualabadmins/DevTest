@@ -1,5 +1,5 @@
 ﻿{
-  "itemDisplayName": "AD Base Configuration",
+  "itemDisplayName": "AD Base Configuration v1.0",
   "description": "This template deploys a base environment with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain. See https://github.com/oualabadmins/DevTest/tree/master/AD-base-config for details.",
   "summary": "This template deploys a multi-vm base environment on corpnet with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain. Provisions an AD domain and joins member VMs. See https://github.com/oualabadmins/DevTest/tree/master/AD-base-config for details and deployment guidance.",
   "githubUsername": "kelleyvice-msft",
