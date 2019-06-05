@@ -76,7 +76,10 @@ The following resources are deployed as part of the solution:
 
 `Tags: TLG, Test Lab Guide, Base Configuration`
 ___
-Developed by the **MAX Skunkworks Lab**  
+Developed by the **MARVEL Skunkworks Lab**
+
+![alt text](images/maxskunkworkslogo-small.jpg "MAX Skunkworks")
+
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
 
