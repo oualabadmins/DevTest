@@ -1,7 +1,7 @@
 ﻿{
-  "itemDisplayName": "AD Base Configuration 1.3",
-  "description": "This template deploys a base environment with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain. Time to deploy: 25-40 minutes. See https://aka.ms/DTL-AD-base for details.",
+  "itemDisplayName": "AD Base Configuration 1.4",
+  "description": "This template deploys a base environment with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain. Time to deploy: 20-50 minutes. See https://aka.ms/DTL-AD-base for details.",
   "summary": "This template deploys a multi-vm base environment on corpnet with an AD domain, SQL, SharePoint, app servers and Windows 10 VMs joined to the domain. Provisions an AD domain and joins member VMs. See https://aka.ms/DTL-AD-base for details and deployment guidance.",
   "githubUsername": "kelleyvice-msft",
-  "dateUpdated": "2019-5-23"
+  "dateUpdated": "2019-6-5"
 }
