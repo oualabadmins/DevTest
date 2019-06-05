@@ -18,15 +18,15 @@ All server VMs can be deployed with Windows Server 2012 R2, 2016 or 2019, and al
 
 This template is intended for deployment in a **corpnet-connected DevTest lab**. You can deploy this template in the general-use [MAX-DTL-WCUS-01 DevTest lab](https://aka.ms/devtest1) by clicking the **Add+** button and selecting the base **5-Tier AD Base Configuration**:
 
-![ad-base-config-base](https://github.com/oualabadmins/DevTest/raw/master/5-tier-AD-base-config/images/ad-base-config-base.png)
+![base](images/ad-base-config-base.png)
 
 ### Example deployment configuration:
 
-![ad-base-config-example](https://github.com/oualabadmins/DevTest/raw/master/5-tier-AD-base-config/images/ad-base-config-example.png)
+![example](images/ad-base-config-example.png)
 
 ### Example deployment resources:
 
-![ad-base-config-resources](https://github.com/oualabadmins/DevTest/raw/master/5-tier-AD-base-config/images/ad-base-config-resources.png)
+![resources](images/ad-base-config-resources.png)
 
 ## Solution notes
 
