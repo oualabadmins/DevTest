@@ -2,7 +2,7 @@
 
 **Time to deploy**: 20-50 minutes, depending on complexity
 
-<span style="color:red">**IMPORTANT!**</span> This is a <span style="color:red">**BETA TEMPLATE**</span> and has not been completely tested.
+&#x1F34E; **IMPORTANT!**</span> This is a **BETA TEMPLATE** and has not been completely tested.
 
 The **AD Base Configuration** template provisions a flexible DevTest Lab test environment with a custom AD domain on an existing corpnet-connected ER circuit. You can choose to deploy the following tiers:
 
