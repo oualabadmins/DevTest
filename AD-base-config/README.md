@@ -1,14 +1,16 @@
-﻿# Skunkworks Lab - AD Base Configuration v1.4
+﻿# Skunkworks Lab - AD Base Configuration v1.4 (Beta)
 
 **Time to deploy**: 20-50 minutes, depending on complexity
 
-The **AD Base Configuration** template provisions a DevTest Lab test environment on an existing corpnet-connected ER circuit consisting of:
+<span style="color:red">**IMPORTANT!**</span> This is a <span style="color:red">**BETA TEMPLATE**</span> and has not been completely tested.
 
-+ Windows Server 2012 R2 or 2016 Active Directory domain controller for a custom AD domain
-+ Optional SQL Server
-+ Application servers with IIS
-+ SharePoint Servers
-+ Windows 10 clients
+The **AD Base Configuration** template provisions a flexible DevTest Lab test environment with a custom AD domain on an existing corpnet-connected ER circuit. You can choose to deploy the following tiers:
+
++ AD DC
++ SQL Server
++ Application server
++ SharePoint Server
++ Windows 10 client
 
 All server VMs can be deployed with Windows Server 2012 R2, 2016 or 2019, and all VMs are automatically joined to the custom AD domain.
 
