@@ -31,7 +31,7 @@ This template is intended for deployment in a **corpnet-connected DevTest lab**.
 The following resources are deployed as part of the solution:
 
 + **AD DC VM**: Windows Server VM configured as a domain controller and DNS.
-+ **App Server VM(s)**: 0-_X_ Windows Server VM(s). IIS is installed, and C:\Files containing example.txt is shared as "Files".
++ **App Server VM(s)**: 0-_X_ Windows Server VM(s) for custom purposes.
 + **SQL Server**: 0-1 Windows Server VM(s) with SQL Server **2014 SP3**, **2016 SP2** or **2017**. The hostname is always **SQL**.
 + **SharePoint Server**: 0-_X_ Windows Server VM(s) with SharePoint Server **2013**, **2016** or **2019**
 + **Client VM(s)**: 0-_X_ Windows 10 client(s)
@@ -43,7 +43,6 @@ The following resources are deployed as part of the solution:
 
 ## Solution notes
 
-+ During deployment, Azure will append a series of numbers to the VM name if it is not unique within the DevTest Lab instance. These numbers are only appended to the VM name as shown in Azure, _not_ the actual machine hostname.
 + Machine tier deployment notes:
   + **AD DC**:
     + Users created: _User1_ (domain admin account), _sqlsvc_ (SQL service), and _spfarmsvc_ (SharePoint Farm service). These accounts all use the password you specify in the **adminPassword** field.
@@ -52,15 +51,22 @@ The following resources are deployed as part of the solution:
     + You can only deploy a single SQL Server VM. SQL AlwaysOn is not available in this template.
     + SQL is configured with the default instance name SQL\\_MSSQLSERVER_ with TCP enabled on port **1433**.
     + The user account you specified in the deployment is used to create a local admin account on the SQL Server VM that belongs to the _sysadmin_ role. Other domain accounts are added as SQL logins in the sysadmin role by DSC: _\<domain>\domain admin account_, _\<domain>\sqlsvc_ and _\<domain>\spfarmsvc_.
-  + **SharePoint Server**:
+  + **SharePoint Servers**:
     + SharePoint is installed, but not configured. To provision SharePoint, either run the Configuration Wizard or use [AutoSPInstaller](https://autospinstaller.com).
       + Before deployment, check to make sure you choose a SQL Server version that is supported by the desired SharePoint Server version.
       + When configuring SharePoint, specify the database server SQL.<yourdomain>, and use the database access account _\<domain>\sqlsvc_ using the same password you specified for the admin account.
       + Use the service account _\<domain>\spsvc_ for the SharePoint Farm service.
     + You can navigate to SharePoint sites in your deployment from other VMs in the same deployment. If you want to navigate to your deployment's SharePoint sites from your work computer, you must add the SharePoint server's FQDN (i.e. _SP1.\<domain>.com_) and IP address to your work computer's HOSTS file (C:\Windows\system32\drivers\etc\hosts).
-+ The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
-+ The other machine tier's VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
-+ Remember, when you RDP to your VM, you will use **domain\adminusername** for the custom domain of your environment, _not_ your corpnet credentials.
+  + **App servers**:
+    + IIS is installed on each app server, and C:\Files containing the blank document _example.txt_ is shared as "Files".
+    + Azure AD Connect is installed on the first app server only. APP1 will always be your DirSync server.
+  + **Windows 10 clients**: No special configuration other than joining to the local AD domain.
+
++ **General notes**:
+  + During deployment, if the _Environment Name_ value is not unique within the DevTest Lab instance, Azure will append a series of numbers to the VM names in your deployment. These numbers are only appended to the VM names as shown in Azure, _not_ the machine hostnames.
+  + The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is set to the value you provide in the _Admin Password_ parameter.
+  + The other machine tier's VM resources depend on the **ADDC** resource deployment to ensure that the AD domain exists prior to execution of the JoinDomain extensions. The asymmetric VM deployment adds a few minutes to the overall deployment time.
+  + Remember, when you RDP to your VM, you will use **domain\adminusername** for the custom domain of your environment, _not_ your corpnet credentials.
 
 ## Known issues
 
@@ -86,4 +92,4 @@ Last update: _6/5/2019_
 + **5/21/2019**: Configured SQLConfig.ps1 to add new logins as type _WindowsUser_.
 + **5/22/2019**: Reconfigured DSC for SQL configuration. Previous DSC config was failing to log into SQL.
 + **5/23/2019**: Configured DSC to run BaseConfig script for all server VMs.
-+ **6/5/2019**:  Updated DSC resources. BaseConfig now runs as a CSE; SQL is set to _Mixed_ login mode; DSC auth to SQL works as expected.
++ **6/5/2019**:  Updated DSC resources. BaseConfig now runs as a CSE; SQL is set to _Mixed_ login mode; DSC auth to SQL works as expected; added AAD Connect install to the AppConfig DSC configuration to install only on APP1.
