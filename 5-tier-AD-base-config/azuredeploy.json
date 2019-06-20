@@ -5,16 +5,16 @@
     "configName": {
       "type": "string",
       "metadata": {
-        "description": "The unique prefix name of the deployment, i.e. kvice-sp-01. Do not use spaces or special characters other than _ or -. Used to prefix resource names for the deployment."
+        "description": "The unique prefix name of the deployment, i.e. alias-sp-01. Do not use spaces or special characters other than _ or -. Used to prefix resource names for the deployment."
       },
-      "defaultValue": "<alias>-<purpose>-<2-digit number>"
+      "defaultValue": ""
     },
     "domainName": {
       "type": "string",
       "metadata": {
-        "description": "The FQDN of the AD domain. Use a unique name, such as corp.contoso52.com."
+        "description": "The FQDN of the AD domain, such as corp.contoso.com."
       },
-      "defaultValue": "corp.<contosoXX>.com"
+      "defaultValue": ""
     },
     "adminUsername": {
       "type": "string",
@@ -25,8 +25,9 @@
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The domain administrator account password. Don't forget this! We can't recover it if you do."
-      }
+        "description": "The domain administrator account password. Must be at least 8 characters with one upper case letter, one number and one symbol. Don't forget this! We can't recover it if you do."
+      },
+      "minLength": 8
     },
     "numberOfAppVms": {
       "type": "int",
@@ -34,7 +35,7 @@
         "description": "The number of app server VMs."
       },
       "allowedValues": [
-        0, 1, 2
+        0, 1, 2, 3, 4, 5
       ],
       "defaultValue": 1
     },
@@ -54,7 +55,7 @@
         "description": "The number of SharePoint Server VMs."
       },
       "allowedValues": [
-        0, 1, 2
+        0, 1, 2, 3, 4, 5
       ],
       "defaultValue": 1
     },
@@ -64,7 +65,7 @@
         "description": "The number of Windows 10 client VMs."
       },
       "allowedValues": [
-        0, 1, 2
+        0, 1, 2, 3, 4, 5
       ],
       "defaultValue": 1
     },
