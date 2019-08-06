@@ -1,8 +1,6 @@
-﻿# Skunkworks Lab - 5-Tier AD Base Configuration v0.9 (BETA)
+﻿# Skunkworks Lab - 5-Tier AD Base Configuration v1.0
 
 **Time to deploy**: 20-50 minutes, depending on complexity
-
-&#x1F34E; **IMPORTANT!**</span> This is a **BETA TEMPLATE** and has not been completely tested.
 
 The **5-Tier AD Base Configuration** template provisions a flexible DevTest Lab test environment with a custom AD domain on an existing corpnet-connected ER circuit. You can choose to deploy the following five tiers (only the _AD DC_ tier is required):
 
@@ -82,3 +80,4 @@ Last update: _6/5/2019_
 + **5/22/2019**: Reconfigured DSC for SQL configuration. Previous DSC config was failing to log into SQL.
 + **5/23/2019**: Configured DSC to run BaseConfig script for all server VMs.
 + **6/5/2019**:  Updated DSC resources. BaseConfig now runs as a CSE; SQL is set to _Mixed_ login mode; DSC auth to SQL works as expected; added AAD Connect install to the AppConfig DSC configuration to install only on APP1.
++ **8/6/2019**: Set version to v1.0 after multi-user testing.
