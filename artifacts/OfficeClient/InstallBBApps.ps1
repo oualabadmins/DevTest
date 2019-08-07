@@ -149,6 +149,6 @@ else {
 	}
 
 	# Update KMS VL server and activate Office licenses
-	. \\max-share.osscpub.selfhost.corp.microsoft.com\library\scripts\RDS\Office\OfficeKMSActivation.ps1
+	. ($share + "Office/OfficeKMSActivation.ps1")
 
 exit
