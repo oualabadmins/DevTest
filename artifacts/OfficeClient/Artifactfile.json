@@ -1,0 +1,26 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+    "title": "Install Office Client",
+    "publisher": "MARVEL Skunkworks",
+    "description": "Installs Office client and Charles Proxy.",
+    "tags": [
+      "Windows"
+    ],
+    "iconUri": "https://www.powershellgallery.com/Content/Images/packageDefaultIcon.png",
+    "targetOsType": "Windows",
+    "parameters": {
+        "OfficeVersion": {
+          "type": "string",
+          "displayName": "Office client version",
+          "allowedValues": [
+              "2007","2010","2013"
+          ],
+          "defaultValue": "2007",
+          "description": "Choose Office client version 2007, 2010 or 2013"
+        }
+    },
+    "runCommand": {
+      "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File InstallBBApps.ps1 ',parameters('OfficeVersion')]"
+    }
+  }
+  
