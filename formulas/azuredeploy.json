@@ -1,0 +1,265 @@
+﻿{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "labName": {
+            "type": "string"
+        },
+        "vnetName": {
+            "type": "string"
+        },
+        "repoName": {
+            "type": "string"
+        },
+        "localAdminUsername": {
+            "type": "string"
+        },
+        "localAdminPassword": {
+            "type": "string"
+        },
+        "domainName": {
+            "type": "string"
+        },
+        "domainOU": {
+            "type": "string"
+        },
+        "domainUsername": {
+            "type": "string"
+        },
+        "domainPassword": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+        "repoPathOLD": "[concat(resourceId('microsoft.devtestlab/labs/artifactsources', parameters('labName'), parameters('repoName')))]",
+        "repoPath": "[concat('/artifactsources/', parameters('repoName'))]"
+    },
+    "resources": [
+        {
+            "comments": "Windows 10 with Office 2007",
+            "type": "Microsoft.DevTestLab/labs/formulas",
+            "name": "[concat(parameters('labName'), '/', 'Office-Client-2007')]",
+            "apiVersion": "2016-05-15",
+            "properties": {
+                "description": "Windows 10 ENT 1903 with Office 2007 Pro x32 including Project, SPD & Visio. Joined to Redmond.",
+                "author": "kvice@microsoft.com",
+                "publisher": "MARVEL Skunkworks",
+                "osType": "Windows",
+                "formulaContent": {
+                  "properties": {
+                    "size": "Standard_DS2_v2",
+                    "userName": "[parameters('localAdminUsername')]",
+                    "password": "[parameters('localAdminPassword')]",
+                    "labSubnetName": "Subnet-1",
+                    "labVirtualNetworkId": "[concat('/virtualnetworks/', parameters('vnetName'))]",
+                    "disallowPublicIpAddress": true,
+                    "artifacts": [
+                      {
+                        "artifactId": "[concat(variables('repoPath'), '/artifacts/ad')]",
+                        "parameters": [
+                          {
+                            "name": "domainName",
+                            "value": "[parameters('domainName')]"
+                          },
+                          {
+                            "name": "domainOU",
+                            "value": "[parameters('domainOU')]"
+                          },
+                          {
+                            "name": "domainJoinUser",
+                            "value": "[parameters('domainUsername')]"
+                          },
+                          {
+                            "name": "domainJoinUserPassword",
+                            "value": "[parameters('domainPassword')]"
+                          }
+                        ]
+                      },
+                      {
+                        "artifactId": "[concat(variables('repoPath'), '/artifacts/officeclient')]",
+                        "parameters": [
+                            {
+                              "name": "OfficeVersion",
+                              "value": "2007"
+                            }
+                        ]
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-chrome",
+                        "parameters": []
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-firefox",
+                        "parameters": []
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-notepadplusplus",
+                        "parameters": []
+                      }
+                    ],
+                    "galleryImageReference": {
+                      "offer": "Windows-10",
+                      "publisher": "MicrosoftWindowsDesktop",
+                      "sku": "19h1-ent",
+                      "osType": "Windows",
+                      "version": "latest"
+                    }
+                  }
+                }
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Windows 10 with Office 2010",
+            "type": "Microsoft.DevTestLab/labs/formulas",
+            "name": "[concat(parameters('labName'), '/', 'Office-Client-2010')]",
+            "apiVersion": "2016-05-15",
+            "properties": {
+                "description": "Windows 10 ENT 1903 with Office 2010 Pro x32 including Project, SPD & Visio. Joined to Redmond.",
+                "author": "kvice@microsoft.com",
+                "publisher": "MARVEL Skunkworks",
+                "osType": "Windows",
+                "formulaContent": {
+                  "properties": {
+                    "size": "Standard_DS2_v2",
+                    "userName": "[parameters('localAdminUsername')]",
+                    "password": "[parameters('localAdminPassword')]",
+                    "labSubnetName": "Subnet-1",
+                    "labVirtualNetworkId": "[concat('/virtualnetworks/', parameters('vnetName'))]",
+                    "disallowPublicIpAddress": true,
+                    "artifacts": [
+                      {
+                        "artifactId": "[concat(variables('repoPath'), '/artifacts/ad')]",
+                        "parameters": [
+                          {
+                            "name": "domainName",
+                            "value": "[parameters('domainName')]"
+                          },
+                          {
+                            "name": "domainOU",
+                            "value": "[parameters('domainOU')]"
+                          },
+                          {
+                            "name": "domainJoinUser",
+                            "value": "[parameters('domainUsername')]"
+                          },
+                          {
+                            "name": "domainJoinUserPassword",
+                            "value": "[parameters('domainPassword')]"
+                          }
+                        ]
+                      },
+                      {
+                        "artifactId": "[concat(variables('repoPath'), '/artifacts/officeclient')]",
+                        "parameters": [
+                            {
+                              "name": "OfficeVersion",
+                              "value": "2010"
+                            }
+                        ]
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-chrome",
+                        "parameters": []
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-firefox",
+                        "parameters": []
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-notepadplusplus",
+                        "parameters": []
+                      }
+                    ],
+                    "galleryImageReference": {
+                      "offer": "Windows-10",
+                      "publisher": "MicrosoftWindowsDesktop",
+                      "sku": "19h1-ent",
+                      "osType": "Windows",
+                      "version": "latest"
+                    }
+                  }
+                }
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Windows 10 with Office 2013",
+            "type": "Microsoft.DevTestLab/labs/formulas",
+            "name": "[concat(parameters('labName'), '/', 'Office-Client-2013')]",
+            "apiVersion": "2016-05-15",
+            "properties": {
+                "description": "Windows 10 ENT 1903 with Office 2013 Pro x32 including Project, SPD & Visio. Joined to Redmond.",
+                "author": "kvice@microsoft.com",
+                "publisher": "MARVEL Skunkworks",
+                "osType": "Windows",
+                "formulaContent": {
+                  "properties": {
+                    "size": "Standard_DS2_v2",
+                    "userName": "[parameters('localAdminUsername')]",
+                    "password": "[parameters('localAdminPassword')]",
+                    "labSubnetName": "Subnet-1",
+                    "labVirtualNetworkId": "[concat('/virtualnetworks/', parameters('vnetName'))]",
+                    "disallowPublicIpAddress": true,
+                    "artifacts": [
+                      {
+                        "artifactId": "[concat(variables('repoPath'), '/artifacts/ad')]",
+                        "parameters": [
+                          {
+                            "name": "domainName",
+                            "value": "[parameters('domainName')]"
+                          },
+                          {
+                            "name": "domainOU",
+                            "value": "[parameters('domainOU')]"
+                          },
+                          {
+                            "name": "domainJoinUser",
+                            "value": "[parameters('domainUsername')]"
+                          },
+                          {
+                            "name": "domainJoinUserPassword",
+                            "value": "[parameters('domainPassword')]"
+                          }
+                        ]
+                      },
+                      {
+                        "artifactId": "[concat(variables('repoPath'), '/artifacts/officeclient')]",
+                        "parameters": [
+                            {
+                              "name": "OfficeVersion",
+                              "value": "2013"
+                            }
+                        ]
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-chrome",
+                        "parameters": []
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-firefox",
+                        "parameters": []
+                      },
+                      {
+                        "artifactId": "/artifactsources/public repo/artifacts/windows-notepadplusplus",
+                        "parameters": []
+                      }
+                    ],
+                    "galleryImageReference": {
+                      "offer": "Windows-10",
+                      "publisher": "MicrosoftWindowsDesktop",
+                      "sku": "19h1-ent",
+                      "osType": "Windows",
+                      "version": "latest"
+                    }
+                  }
+                }
+            },
+            "resources": [],
+            "dependsOn": []
+        }
+    ],
+    "outputs": {}
+}
