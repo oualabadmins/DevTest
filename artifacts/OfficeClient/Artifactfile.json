@@ -20,7 +20,7 @@
         }
     },
     "runCommand": {
-      "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File InstallBBApps.ps1 ',parameters('OfficeVersion')]"
+      "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File InstallBBApps.ps1 ',parameters('OfficeVersion'))]"
     }
   }
   
