@@ -15,7 +15,7 @@
             "type": "string"
         },
         "localAdminPassword": {
-            "type": "string"
+            "type": "securestring"
         },
         "domainName": {
             "type": "string"
