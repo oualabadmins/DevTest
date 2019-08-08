@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+  "title": "Add LCA-approved users to a private AD domain",
+  "publisher": "MARVEL Skunkworks",
+  "description": "Adds LCA-approved users to a private AD domain. Add this artifact immediately following the Create AD Forest artifact.",
+  "tags": [
+    "Windows",
+    "Active Directory"
+  ],
+  "iconUri": "https://www.powershellgallery.com/Content/Images/packageDefaultIcon.png",
+  "targetOsType": "Windows",
+  "parameters": {
+  },
+  "runCommand": {
+    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File AddUsers.ps1')]"
+  }
+}

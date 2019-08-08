@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+  "title": "Join Corpnet Domain",
+  "publisher": "MARVEL Skunkworks",
+  "description": "Joins the VM to the corpnet domain.",
+  "tags": [
+    "Windows",
+    "Active Directory"
+  ],
+  "iconUri": "https://www.powershellgallery.com/Content/Images/packageDefaultIcon.png",
+  "targetOsType": "Windows",
+  "parameters": {
+    "domainName": {
+      "type": "string",
+      "displayName": "Active Directory Domain Name",
+      "defaultValue": "",
+      "description": "The AD domain to join. Do not change the default value."
+    },
+    "domainOU": {
+      "type": "string",
+      "displayName": "Active Directory Domain OU",
+      "defaultValue": "",
+      "description": "The OU for the computer object. Do not change the default value."
+    },
+    "domainJoinUser": {
+      "type": "string",
+      "displayName": "Domain Join User Account",
+      "defaultValue": "",
+      "description": "The user account with rights to join the domain. Do not change the default value."
+    },
+    "domainJoinUserPassword": {
+      "type": "string",
+      "displayName": "Domain Join User Account Password",
+      "defaultValue": "",
+      "description": "Password of the account. Do not change the default value.",
+      "controlType": "passwordBox"
+    }
+  },
+  "runCommand": {
+    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File DomainJoin.ps1', ' -domain ', parameters('domainName'), ' -ouPath ', parameters('domainOU'), ' -userName ', parameters('domainJoinUser'), ' -Password ', parameters('domainJoinUserPassword'))]"
+  }
+}
+

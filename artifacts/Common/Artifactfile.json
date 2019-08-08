@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+  "title": "Configure common settings",
+  "publisher": "MARVEL Skunkworks",
+  "description": "Configures common settings (disable UAC and ESC, set execution policy etc.).",
+  "tags": [
+    "Windows"
+  ],
+  "iconUri": "https://www.powershellgallery.com/Content/Images/packageDefaultIcon.png",
+  "targetOsType": "Windows",
+  "runCommand": {
+    "commandToExecute": "powershell.exe -ExecutionPolicy bypass -File default_settings.ps1"
+  }
+}
