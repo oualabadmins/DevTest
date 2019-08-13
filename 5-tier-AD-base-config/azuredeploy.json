@@ -143,7 +143,7 @@
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
 
-    "vnetPrefix": "[first(resourceGroup().location).toLower]",
+    "vnetPrefix": "[toLower(first(resourceGroup().location))]",
     "vnetName": "[concat('maxlab-corp-',variables('vnetPrefix'),'cus-vnet-1')]",
 
     "VMs": {
