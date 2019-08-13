@@ -78,7 +78,7 @@ else {
 	$version = $global:version
 	$share = "https://devteststaging01.blob.core.windows.net/dtl-resources/RDS/"
 	$SASkey = "?sv=2018-03-28&ss=b&srt=sco&sp=rl&se=2021-08-08T04:06:58Z&st=2019-08-07T20:06:58Z&spr=https&sig=A0%2FaYC3dK5xhh1V702E%2BSXm5JuGgKFp2Xx%2F935glE7U%3D"
-	$clientPath = "\\max-share.osscpub.selfhost.corp.microsoft.com\library\install\Office\client\"
+	$cliPath = "\\max-share.osscpub.selfhost.corp.microsoft.com\library\install\Office\client"
 
     # Create C:\Scripts folders
 	New-Item -Path C:\Scripts -ItemType Directory -ErrorAction SilentlyContinue
@@ -109,34 +109,32 @@ else {
 	# Exit if existing client
 	$installed = Get-WmiObject -class Win32_product | where {$_.Description -like 'Microsoft Office*' }
 	if ($installed) {exit}
-	
-	pushd \\max-share.osscpub.selfhost.corp.microsoft.com\library\install\Office\client\
 
 	# Install Office 2007 ENT
 	if ($version -eq "2007")
 	{
-		Start-Process ".\OfficeEnterprise_2007\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2007Ent.MSP" -Wait
-		Start-Process ".\Project_Professional_2007\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2007ProjectPro.MSP" -Wait
-		Start-Process ".\SharePoint_Designer_2007\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2007SPD.MSP" -Wait
-		Start-Process ".\Visio_Professional_2007\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2007VisioPro.MSP" -Wait
+		Start-Process "$cliPath\OfficeEnterprise_2007\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2007Ent.MSP" -Wait
+		Start-Process "$cliPath\Project_Professional_2007\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2007ProjectPro.MSP" -Wait
+		Start-Process "$cliPath\SharePoint_Designer_2007\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2007SPD.MSP" -Wait
+		Start-Process "$cliPath\Visio_Professional_2007\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2007VisioPro.MSP" -Wait
 	}
 
 	# Install Office 2010 ENT
 	if ($version -eq "2010")
 	{
-		Start-Process ".\Office_ProfessionalPlus_2010_SP1\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2010Pro.MSP" -Wait
-		Start-Process ".\Project_Professional_2010_SP1\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2010ProjectPro.MSP" -Wait
-		Start-Process ".\SharePoint_Designer_2010_SP1\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2010SPD.MSP" -Wait
-		Start-Process ".\Visio_Premium_2010_SP1\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2010VisioPro.MSP" -Wait
+		Start-Process "$cliPath\Office_ProfessionalPlus_2010_SP1\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2010Pro.MSP" -Wait
+		Start-Process "$cliPath\Project_Professional_2010_SP1\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2010ProjectPro.MSP" -Wait
+		Start-Process "$cliPath\SharePoint_Designer_2010_SP1\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2010SPD.MSP" -Wait
+		Start-Process "$cliPath\Visio_Premium_2010_SP1\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2010VisioPro.MSP" -Wait
 	}
 
 	# Install Office 2013 ENT
 	if ($version -eq "2013")
 	{
-		Start-Process ".\Office_Professional_2013\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2013Pro.MSP" -Wait
-		Start-Process ".\Project_Professional_2013\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2013ProjectPro.MSP" -Wait
-		Start-Process ".\SharePoint_Designer_2013\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2013SPD.MSP" -Wait
-		Start-Process ".\Visio_Professional_2013\setup.exe" -ArgumentList "/adminfile .\OfficeMSPs\Office2013VisioPro.MSP" -Wait
+		Start-Process "$cliPath\Office_Professional_2013\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2013Pro.MSP" -Wait
+		Start-Process "$cliPath\Project_Professional_2013\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2013ProjectPro.MSP" -Wait
+		Start-Process "$cliPath\SharePoint_Designer_2013\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2013SPD.MSP" -Wait
+		Start-Process "$cliPath\Visio_Professional_2013\setup.exe" -ArgumentList "/adminfile $cliPath\OfficeMSPs\Office2013VisioPro.MSP" -Wait
 	}
 
 	# Update KMS VL server and activate Office licenses
