@@ -138,6 +138,6 @@ else {
 	}
 
 	# Update KMS VL server and activate Office licenses
-	. ($share + "Office/OfficeKMSActivation.ps1")
+	Start-Process "$cliPath\OfficeKMSActivation.ps1"
 
 exit
