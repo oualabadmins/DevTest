@@ -14,7 +14,7 @@ All server VMs can be deployed with Windows Server 2012 R2, 2016 or 2019, and al
 
 ## Usage
 
-This template is intended for deployment in a **corpnet-connected DevTest lab**. You can deploy this template in the general-use [MAX-DTL-WCUS-01 DevTest lab](https://aka.ms/devtest1) by clicking the **Add+** button and selecting the base **5-Tier AD Base Configuration**:
+This template is intended for deployment in a **corpnet-connected DevTest lab**. You can deploy this template in the general-use [MAX-DTL-WCUS-01 DevTest lab](https://aka.ms/devtest1) or other DevTest labs where it may be enabled by clicking the **Add+** button and selecting the base **5-Tier AD Base Configuration**:
 
 ![base](images/5-tier-ad-base-config-base.png)
 
@@ -60,7 +60,7 @@ This template is intended for deployment in a **corpnet-connected DevTest lab**.
 ___
 Developed by the **MARVEL Skunkworks Lab**
 
-![alt text](../../lab_deploy/common/images/maxskunkworkslogo-small.jpg "MARVEL Skunkworks")
+![alt text](../../../lab_deploy/common/images/maxskunkworkslogo-small.jpg "MARVEL Skunkworks")
 
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
@@ -81,3 +81,4 @@ Last update: _6/5/2019_
 + **5/23/2019**: Configured DSC to run BaseConfig script for all server VMs.
 + **6/5/2019**:  Updated DSC resources. BaseConfig now runs as a CSE; SQL is set to _Mixed_ login mode; DSC auth to SQL works as expected; added AAD Connect install to the AppConfig DSC configuration to install only on APP1.
 + **8/6/2019**: Set version to v1.0 after multi-user testing.
++ **8/20/2019**: Moved to /templates folder to prevent same-level items from appearing in the DTL **Add** menu.
