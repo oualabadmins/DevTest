@@ -60,7 +60,7 @@ This template is intended for deployment in a **corpnet-connected DevTest lab**.
 ___
 Developed by the **MARVEL Skunkworks Lab**
 
-![alt text](../../../lab_deploy/common/images/maxskunkworkslogo-small.jpg "MARVEL Skunkworks")
+![alt text](https://github.com/oualabadmins/lab_deploy/raw/master/common/images/maxskunkworkslogo-small.jpg "MARVEL Skunkworks")
 
 Author: Kelley Vice (kvice@microsoft.com)  
 https://github.com/maxskunkworks
