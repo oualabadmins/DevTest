@@ -1,4 +1,4 @@
-﻿# Skunkworks Lab - 5-Tier AD Base Configuration v1.0
+﻿# Skunkworks Lab (DevTest) - 5-Tier AD Base Configuration v1.0
 
 **Time to deploy**: 20-50 minutes, depending on complexity
 
