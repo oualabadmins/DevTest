@@ -1,4 +1,4 @@
-﻿# Skunkworks Lab (DevTest) - Add client VMs to existing deployment v0.4
+﻿# Skunkworks Lab (DevTest) - Add client VMs to existing deployment v1.0
 
 **Time to deploy**: ~10 minutes
 
