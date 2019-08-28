@@ -41,24 +41,34 @@
         "description": "The IP address of the AD DC VM."
       }
     },
+    "clientOS": {
+      "type": "string",
+      "metadata": {
+        "description": "The desired operating system for your client VMs."
+      },
+      "allowedValues": [
+        "Windows 7","Windows 8.1","Windows 10"
+      ],
+      "defaultValue": 1
+    },
     "numberOfClientVms": {
       "type": "int",
       "metadata": {
-        "description": "The number of Windows 10 client VMs."
+        "description": "The number of Windows client VMs."
       },
       "defaultValue": 1
     },
     "clientStartNumber": {
       "type": "int",
       "metadata": {
-        "description": "The starting number for Windows 10 client VMs. Start with the number following the highest existing client number."
+        "description": "The starting number for Windows client VMs. Start with the number following the highest existing client number."
       },
       "defaultValue": 1
     },
     "vmSizeClient": {
       "type": "string",
       "metadata": {
-        "description": "Select a VM size for all Windows 10 client VMs in your deployment."
+        "description": "Select a VM size for all Windows client VMs in your deployment."
       },
       "allowedValues": [
         "Standard_DS2_v2", "Standard_DS3_v2", "Standard_DS4_v2"
@@ -103,7 +113,8 @@
       "configName": "[parameters('configName')]",
       "ou": "[concat(parameters('computerOU'),',DC=',replace(parameters('domainName'),'.',',DC='))]",
       "scriptPath": "[concat(parameters('_artifactsLocation'),'/scripts')]",
-      "startNumber" : "[parameters('clientStartNumber')]"
+      "startNumber" : "[parameters('clientStartNumber')]",
+      "clientOS": "[parameters('clientOS')]"
     }
   },
 
