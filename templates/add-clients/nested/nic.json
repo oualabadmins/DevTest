@@ -62,11 +62,7 @@
               ],
               "dnsSettings": {
                 "dnsServers": [
-                  "[parameters('dcIp')]",
-                  "10.50.10.50",
-                  "10.50.50.50",
-                  "10.138.39.138",
-                  "10.138.39.139"
+                  "[parameters('dcIp')]"
                 ],
                 "internalDomainNameSuffix": "[parameters('domainName')]"
               }
