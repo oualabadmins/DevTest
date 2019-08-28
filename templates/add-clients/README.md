@@ -2,7 +2,7 @@
 
 **Time to deploy**: ~10 minutes
 
-The **Add client VMs to existing deployment** template provisions _x_ number of client VMs to an existing deployment and joins them to the deployment's domain.
+The **Add client VMs to existing deployment** template provisions _x_ number of client VMs to an existing deployment and joins them to the deployment's domain. You can choose Windows 10, 8.1 or 7.
 
 ## Usage
 
@@ -11,8 +11,9 @@ Provide the following information:
 + Name of the configuration (the name of the top node that will appear in the DevTest lab)VNet name to which VMs will be connected
 + AD domain name
 + OU for computer accounts, with container identifier (i.e. _CN=Computers_)
-+ AD DC IP address (you can get this from the DC's overview page)
 + AD username and password
++ AD DC IP address (you can get this from the DC's overview page)
++ Client OS (Windows 10, 8.1 or 7)
 + Number of client VMs to add
 + Starting number for client names (if there are existing clients, use the next unused increment)
 + VM size (generally, the default size _Standard_DS2_v2_ is sufficient)
@@ -39,4 +40,4 @@ Last update: _8/27/2019_
 
 + **6/19/2019**: Initial commit. Derived from oualabadmins\lab_deploy\M365-base-config_DirSync. Added parameters for vnetName, OU, clientStartNumber, dcIp.
 + **8/27/2019**: Revised for use in DevTest labs.
-+ **8/28/2019**: Corrected issues preventing deployment.
++ **8/28/2019**: Corrected issues preventing deployment, added code to permit OS choice.
