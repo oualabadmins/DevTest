@@ -5,7 +5,7 @@
     "configName": {
       "type": "string",
       "metadata": {
-        "description": "The unique prefix name of the deployment, i.e. kvice-clients. Do not use spaces or special characters other than _ or -. Used to prefix resource names for the deployment."
+        "description": "The unique prefix name of the deployment, i.e. kvice-clients. You may want to use a derivative of the environment to which you are adding clients."
       },
       "defaultValue": ""
     },
@@ -19,7 +19,7 @@
     "computerOU": {
       "type": "string",
       "metadata": {
-        "description": "The custom OU for computer accounts (do not use CN=Computers). Ensure that the case matches."
+        "description": "The custom OU for computer accounts in the existing AD domain. Ensure that the case matches. In most cases, you can use the default value."
       },
       "defaultValue": "OU=Machines"
     },
