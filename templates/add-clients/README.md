@@ -1,4 +1,4 @@
-﻿# Skunkworks Lab (DevTest) - Add client VMs to existing deployment v1.0
+﻿# Skunkworks Lab (DevTest) - Add client VMs to existing deployment v1.1
 
 **Time to deploy**: ~10 minutes
 
@@ -14,6 +14,7 @@ Provide the following information:
 + AD username and password
 + AD DC IP address (you can get this from the DC's overview page)
 + Client OS (Windows 10, 8.1 or 7)
++ Client name prefix (the base name for the client VMs (i.e. CLIENT, which will result in VMs with names like CLIENT1, CLIENT2 etc.)
 + Number of client VMs to add
 + Starting number for client names (if there are existing clients, use the next unused increment)
 + VM size (generally, the default size _Standard_DS2_v2_ is sufficient)
@@ -41,3 +42,4 @@ Last update: _8/27/2019_
 + **6/19/2019**: Initial commit. Derived from oualabadmins\lab_deploy\M365-base-config_DirSync. Added parameters for vnetName, OU, clientStartNumber, dcIp.
 + **8/27/2019**: Revised for use in DevTest labs.
 + **8/28/2019**: Corrected issues preventing deployment, added code to permit OS choice.
++ **9/3/2019**: Added param for client name prefix.

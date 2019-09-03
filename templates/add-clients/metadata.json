@@ -3,5 +3,5 @@
   "description": "This template provisions x number of client VMs to an existing deployment and joins them to the deployment's domain. Time to deploy: ~10 minutes. See https://aka.ms/DTL-add-clients for details.",
   "summary": "This template provisions x number of client VMs to an existing deployment and joins them to the deployment's domain. See https://aka.ms/DTL-add-clients for details and deployment guidance.",
   "githubUsername": "kelleyvice-msft",
-  "dateUpdated": "2019-8-27"
+  "dateUpdated": "2019-9-3"
 }
